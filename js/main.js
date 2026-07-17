@@ -33,6 +33,21 @@
     if (e.key === 'Escape') closeMenu();
   });
 
+  /* ---- Header booking dropdown ---- */
+  var navBook = document.getElementById('navBook');
+  if (navBook) {
+    var bookBtn = navBook.querySelector('button');
+    bookBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = navBook.classList.toggle('open');
+      bookBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function () {
+      navBook.classList.remove('open');
+      bookBtn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
   /* ---- Scroll reveal ---- */
   var reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {

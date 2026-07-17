@@ -134,16 +134,45 @@ a{color:inherit;text-decoration:none}
 .scrolled .brand-ja{color:var(--ink-soft)}
 
 .nav{display:flex;align-items:center;gap:30px}
-.nav a{font-size:.9rem;font-weight:500;color:#fff;position:relative;letter-spacing:.05em;transition:color .3s ease}
-.scrolled .nav a{color:var(--ink)}
-.nav a:not(.nav-cta)::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1.5px;background:var(--gold);transition:width .3s ease}
-.nav a:not(.nav-cta):hover::after{width:100%}
+.nav > a{font-size:.9rem;font-weight:500;color:#fff;position:relative;letter-spacing:.05em;transition:color .3s ease}
+.scrolled .nav > a{color:var(--ink)}
+.nav > a:not(.nav-cta)::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1.5px;background:var(--gold);transition:width .3s ease}
+.nav > a:not(.nav-cta):hover::after{width:100%}
 .nav .nav-cta{
   background:linear-gradient(135deg,var(--gold-light),var(--gold) 55%,var(--gold-deep));
   color:#fff !important;padding:11px 26px;border-radius:999px;font-weight:700;
   box-shadow:0 10px 24px -12px rgba(169,133,63,.8);
 }
 .nav .nav-cta:hover{transform:translateY(-2px)}
+
+/* Header booking dropdown */
+.nav-book{position:relative}
+.nav-book .nav-cta{
+  border:0;cursor:pointer;font-family:var(--jp);font-size:.9rem;letter-spacing:.05em;
+  display:inline-flex;align-items:center;gap:8px;transition:transform .3s ease;
+}
+.nav-book .nav-cta .caret{font-size:.7em;transition:transform .3s ease}
+.nav-book.open .nav-cta .caret{transform:rotate(180deg)}
+.nav-drop{
+  position:absolute;top:calc(100% + 14px);right:0;min-width:270px;
+  background:#fff;border-radius:16px;padding:10px;border:1px solid var(--line);
+  box-shadow:0 26px 60px -24px rgba(30,22,10,.45);
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .3s ease, transform .3s ease, visibility .3s;
+}
+.nav-drop::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px}
+.nav-book:hover .nav-drop,.nav-book.open .nav-drop{opacity:1;visibility:visible;transform:none}
+.nav .nav-drop a{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px 18px;border-radius:11px;color:var(--ink);font-size:.92rem;font-weight:700;
+  letter-spacing:.04em;transition:background .25s ease, color .25s ease;
+}
+.nav .nav-drop a small{font-size:.75rem;font-weight:500;color:var(--gold-deep);white-space:nowrap}
+.nav .nav-drop a:hover{background:var(--ivory)}
+.nav .nav-drop a.nd-group:hover{background:linear-gradient(135deg,var(--gold-light),var(--gold-deep));color:#fff}
+.nav .nav-drop a.nd-group:hover small{color:rgba(255,255,255,.9)}
+.nav .nav-drop a.nd-private:hover{background:var(--ink);color:#fff}
+.nav .nav-drop a.nd-private:hover small{color:rgba(255,255,255,.9)}
 
 .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px;z-index:110}
 .hamburger span{width:26px;height:2px;background:#fff;transition:.35s;border-radius:2px}
@@ -307,9 +336,21 @@ a{color:inherit;text-decoration:none}
 .footer-nav{display:flex;flex-direction:column;gap:12px}
 .footer-nav a{font-size:.9rem;transition:color .3s}
 .footer-nav a:hover{color:var(--gold-light)}
-.footer-contact{display:flex;flex-direction:column;gap:12px}
-.footer-tel{font-family:var(--serif);font-size:1.5rem;color:#fff;letter-spacing:.06em}
-.footer-ig{font-size:.85rem;color:var(--gold-light)}
+.footer-contact{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.pill-btn{
+  display:inline-flex;align-items:center;gap:11px;padding:14px 28px;border-radius:999px;
+  font-weight:700;font-size:.93rem;letter-spacing:.05em;border:1.5px solid transparent;
+  transition:transform .3s ease, box-shadow .3s ease, background .3s ease, color .3s ease;
+}
+.pill-btn:hover{transform:translateY(-3px)}
+.pill-btn svg{width:18px;height:18px;flex:none}
+.pill-tel{
+  background:linear-gradient(135deg,var(--gold-light),var(--gold) 55%,var(--gold-deep));
+  color:#fff;box-shadow:0 12px 28px -12px rgba(169,133,63,.7);
+  font-family:var(--serif);font-size:1.12rem;letter-spacing:.08em;
+}
+.pill-ig{border-color:rgba(255,255,255,.5);color:#fff}
+.pill-ig:hover{background:#fff;color:var(--ink);border-color:#fff}
 .copyright{text-align:center;margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:.08em}
 
 /* ---------- Mobile fixed CTA ---------- */
@@ -406,9 +447,22 @@ a{color:inherit;text-decoration:none}
     box-shadow:-20px 0 50px -20px rgba(0,0,0,.4);padding:40px;z-index:105;
   }
   .menu-open .nav{transform:translateX(0)}
-  .nav a{color:var(--ink) !important;font-size:1.05rem}
-  .nav a:not(.nav-cta)::after{bottom:-8px}
-  .nav .nav-cta{margin-top:8px;padding:14px 32px}
+  .nav > a{color:var(--ink) !important;font-size:1.05rem}
+  .nav > a:not(.nav-cta)::after{bottom:-8px}
+  /* dropdown becomes two inline buttons in the drawer */
+  .nav-book{width:100%;margin-top:8px}
+  .nav-book .nav-cta{display:none}
+  .nav-drop{
+    position:static;opacity:1;visibility:visible;transform:none;
+    background:transparent;border:0;box-shadow:none;padding:0;min-width:0;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .nav .nav-drop a{justify-content:center;gap:8px;padding:15px 12px;border-radius:999px;font-size:.88rem;white-space:nowrap}
+  .nav .nav-drop a small{font-size:.7rem}
+  .nav .nav-drop a.nd-group{background:linear-gradient(135deg,var(--gold-light),var(--gold) 55%,var(--gold-deep));color:#fff}
+  .nav .nav-drop a.nd-group small{color:rgba(255,255,255,.9)}
+  .nav .nav-drop a.nd-private{background:var(--ink);color:#fff}
+  .nav .nav-drop a.nd-private small{color:rgba(255,255,255,.85)}
   .site-header{padding:14px 0}
   .brand-en{font-size:1.1rem}
   body.menu-open{overflow:hidden}
