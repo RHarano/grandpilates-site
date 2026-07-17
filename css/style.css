@@ -275,6 +275,13 @@ a{color:inherit;text-decoration:none}
 .plan-price{text-align:center;font-family:var(--serif);font-weight:600;font-size:2.9rem;line-height:1;color:var(--ink);margin-bottom:26px}
 .plan-price .yen{font-size:1.3rem;vertical-align:.35em;margin-right:2px}
 .plan-price .per{font-size:.95rem;font-family:var(--jp);color:var(--ink-soft);margin-left:4px;letter-spacing:normal}
+.price-grid.two{grid-template-columns:repeat(2,1fr);max-width:920px;margin:0 auto}
+.plan-rows{margin:8px 0 24px;border-top:1px solid var(--line)}
+.plan-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px 4px;border-bottom:1px solid var(--line)}
+.plan-row span{font-weight:700;font-size:.95rem;line-height:1.4}
+.plan-row span small{display:block;font-weight:400;font-size:.76rem;color:var(--ink-soft)}
+.plan-row b{font-family:var(--serif);font-size:1.75rem;font-weight:600;white-space:nowrap;line-height:1}
+.plan-row b i{font-style:normal;font-family:var(--jp);font-weight:400;font-size:.72rem;color:var(--ink-soft);margin-left:3px;letter-spacing:0}
 .plan-feat{list-style:none;margin-bottom:30px;flex:1}
 .plan-feat li{position:relative;padding-left:26px;font-size:.9rem;margin-bottom:12px;color:var(--ink-soft);border-bottom:1px dashed var(--line);padding-bottom:12px}
 .plan-feat li:last-child{border-bottom:0}
@@ -419,7 +426,7 @@ a{color:inherit;text-decoration:none}
 @media (max-width:960px){
   .section{padding:80px 0}
   .point-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
-  .price-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+  .price-grid,.price-grid.two{grid-template-columns:1fr;max-width:440px;margin:0 auto}
   .price-card.featured{transform:none}
   .price-card.featured:hover{transform:translateY(-6px)}
   .flow-steps{grid-template-columns:1fr 1fr;gap:34px 24px}
