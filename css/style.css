@@ -216,6 +216,9 @@ a{color:inherit;text-decoration:none}
 .ticks{list-style:none;margin:22px 0 30px}
 .ticks li{position:relative;padding-left:30px;margin-bottom:12px;font-size:.95rem}
 .ticks li::before{content:"";position:absolute;left:0;top:.6em;width:16px;height:16px;border-radius:50%;background:var(--gold);box-shadow:inset 0 0 0 3px #fff, 0 0 0 1px var(--gold)}
+.more-link{margin-top:16px;font-size:.9rem}
+.more-link a{color:var(--gold-deep);font-weight:700;letter-spacing:.04em;border-bottom:1px solid transparent;transition:border-color .3s}
+.more-link a:hover{border-color:var(--gold-deep)}
 
 /* ---------- Machine ---------- */
 .machine{background:#fff}
@@ -316,6 +319,54 @@ a{color:inherit;text-decoration:none}
 .m-cta b{font-size:.95rem;font-weight:700;letter-spacing:.04em}
 .m-gold{background:linear-gradient(135deg,var(--gold-light),var(--gold) 55%,var(--gold-deep))}
 .m-dark{background:#2a2724}
+
+/* ---------- Detail pages (group / private) ---------- */
+.subhero{position:relative;padding:190px 24px 110px;text-align:center;color:#fff;overflow:hidden}
+.subhero-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.subhero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,22,14,.66),rgba(28,22,14,.42))}
+.subhero-inner{position:relative;z-index:2}
+.subhero .en{font-family:var(--serif);font-weight:600;letter-spacing:.22em;font-size:clamp(2rem,5.5vw,3.6rem);line-height:1.1;text-shadow:0 4px 26px rgba(0,0,0,.45)}
+.subhero .ja{font-family:var(--jp-serif);margin-top:12px;font-size:1.02rem;letter-spacing:.24em}
+.breadcrumb{position:relative;z-index:2;margin-top:26px;font-size:.78rem;letter-spacing:.08em;color:rgba(255,255,255,.78)}
+.breadcrumb a{border-bottom:1px solid rgba(255,255,255,.4);transition:color .3s}
+.breadcrumb a:hover{color:var(--gold-light)}
+.breadcrumb .sep{margin:0 10px;opacity:.6}
+
+.detail-intro{max-width:820px;margin:0 auto;text-align:center;color:var(--ink-soft);font-size:.98rem}
+.detail-intro strong{color:var(--ink)}
+
+.level-list{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.level{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 22px;box-shadow:0 10px 26px -22px rgba(60,48,30,.5)}
+.level b{display:block;font-family:var(--serif);font-size:1.05rem;font-weight:700;letter-spacing:.1em;color:var(--gold-deep);margin-bottom:4px}
+.level span{font-size:.86rem;color:var(--ink-soft)}
+
+.tbl-wrap{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th,.tbl td{padding:17px 24px;border-bottom:1px solid var(--line);text-align:left;font-size:.95rem}
+.tbl tr:last-child th,.tbl tr:last-child td{border-bottom:0}
+.tbl th{font-family:var(--jp-serif);font-weight:600;color:var(--ink);background:#fcf9f3;width:55%}
+.tbl th small{display:block;font-family:var(--jp);font-weight:400;font-size:.78rem;color:var(--ink-soft);margin-top:2px}
+.tbl td{text-align:right;font-family:var(--serif);font-size:1.2rem;letter-spacing:.02em;white-space:nowrap}
+.tbl td .u{font-family:var(--jp);font-size:.78rem;color:var(--ink-soft);margin-left:4px}
+.tbl tr.hl th,.tbl tr.hl td{background:linear-gradient(135deg,#faf3e2,#f5ead0);border-bottom-color:#eadfc4}
+.tbl tr.hl th{color:var(--gold-deep)}
+.tbl-note{margin-top:14px;font-size:.8rem;color:var(--ink-soft)}
+.tbl-head{font-family:var(--jp-serif);font-size:1.15rem;font-weight:600;margin:44px 0 16px;padding-left:14px;border-left:3px solid var(--gold)}
+.tbl-head:first-of-type{margin-top:0}
+
+.reco{max-width:820px;margin:0 auto}
+.reco li{list-style:none;position:relative;padding:14px 18px 14px 46px;background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;font-size:.94rem}
+.reco li::before{content:"✓";position:absolute;left:18px;top:13px;color:var(--gold-deep);font-weight:700;font-size:1rem}
+
+.detail-cta-note{margin-top:18px;font-size:.85rem;color:var(--ink-soft);text-align:center}
+
+@media (max-width:768px){
+  .subhero{padding:150px 20px 80px}
+  .level-list{grid-template-columns:1fr}
+  .tbl th,.tbl td{padding:14px 16px}
+  .tbl th{width:60%}
+  .tbl td{font-size:1.05rem}
+}
 
 /* ---------- Reveal animation ---------- */
 .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease, transform .9s ease}
