@@ -219,8 +219,17 @@ a{color:inherit;text-decoration:none}
 .campaign h2 em{font-style:normal;color:var(--gold-light)}
 .campaign p{margin-top:12px;color:rgba(255,255,255,.82);font-size:.95rem}
 
+/* ---------- Concept ---------- */
+.concept{background:var(--ivory)}
+.concept-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
+.concept-head .sec-label{margin-bottom:14px}
+.concept-head .sec-title{text-align:left;line-height:1.55;font-size:clamp(1.55rem,3vw,2.15rem)}
+.concept-body{padding-top:8px}
+.concept-body p{color:var(--ink-soft);font-size:1rem;margin-bottom:20px;line-height:2.1}
+.concept-body p:last-child{margin-bottom:0}
+
 /* ---------- Points ---------- */
-.points{background:var(--ivory)}
+.points{background:linear-gradient(180deg,var(--cream),var(--ivory))}
 .point-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
 .point-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);transition:transform .4s ease, box-shadow .4s ease}
 .point-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px -28px rgba(60,48,30,.5)}
@@ -360,13 +369,6 @@ a{color:inherit;text-decoration:none}
 .pill-ig:hover{background:#fff;color:var(--ink);border-color:#fff}
 .copyright{text-align:center;margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:.08em}
 
-/* ---------- Mobile fixed CTA ---------- */
-.mobile-cta{display:none;position:fixed;bottom:0;left:0;width:100%;z-index:90;box-shadow:0 -8px 24px -12px rgba(0,0,0,.4)}
-.m-cta{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:9px 6px 11px;text-align:center;color:#fff;line-height:1.3}
-.m-cta span{font-size:.66rem;letter-spacing:.1em;opacity:.9}
-.m-cta b{font-size:.95rem;font-weight:700;letter-spacing:.04em}
-.m-gold{background:linear-gradient(135deg,var(--gold-light),var(--gold) 55%,var(--gold-deep))}
-.m-dark{background:#2a2724}
 
 /* ---------- Detail pages (group / private) ---------- */
 .subhero{position:relative;padding:190px 24px 110px;text-align:center;color:#fff;overflow:hidden}
@@ -433,6 +435,9 @@ a{color:inherit;text-decoration:none}
   .flow-steps li:nth-child(2)::after{display:none}
   .lesson-row{grid-template-columns:1fr;gap:28px;margin-bottom:56px}
   .lesson-row.reverse .lesson-media{order:0}
+  .concept-inner{grid-template-columns:1fr;gap:20px}
+  .concept-head .sec-title{text-align:center;line-height:1.45}
+  .concept-head .sec-label{display:block;text-align:center}
   .machine-inner{grid-template-columns:1fr;gap:36px}
   .machine-text .sec-title{text-align:center}
   .machine-text .sec-label{display:block;text-align:center}
@@ -473,8 +478,6 @@ a{color:inherit;text-decoration:none}
   .site-header{padding:14px 0}
   .brand-en{font-size:1.1rem}
   body.menu-open{overflow:hidden}
-  .mobile-cta{display:flex}
-  body{padding-bottom:58px}
   .book-btn{min-width:0;width:100%;max-width:420px}
   .book-pair{flex-direction:column;align-items:center}
 
