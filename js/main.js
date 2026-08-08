@@ -32,6 +32,12 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeMenu();
   });
+  /* 背景（オーバーレイ）タップでドロワーを閉じる */
+  document.addEventListener('click', function (e) {
+    if (!body.classList.contains('menu-open')) return;
+    if (nav.contains(e.target) || hamburger.contains(e.target)) return;
+    closeMenu();
+  });
 
   /* ---- Header booking dropdown ---- */
   var navBook = document.getElementById('navBook');
