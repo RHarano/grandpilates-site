@@ -24,7 +24,8 @@
 <link rel="icon" href="/images/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/images/agp-studio-wide.webp" type="image/webp" fetchpriority="high" />
 <link rel="stylesheet" href="/css/style.css?v=20260808b" />
 <script type="application/ld+json">
 {
@@ -92,7 +93,7 @@
 
   <!-- ===== Sub hero ===== -->
   <section class="subhero">
-    <div class="subhero-bg" style="background-image:url('/images/agp-studio-wide.jpg')"></div>
+    <div class="subhero-bg" style="background-image:url('/images/agp-studio-wide.jpg');background-image:image-set(url('/images/agp-studio-wide.webp') type('image/webp'), url('/images/agp-studio-wide.jpg') type('image/jpeg'))"></div>
     <div class="subhero-overlay"></div>
     <div class="subhero-inner">
       <h1 class="en">GROUP LESSON</h1>
@@ -120,7 +121,7 @@
   <section class="section lessons" style="padding-top:0">
     <div class="wrap">
       <div class="lesson-row reveal">
-        <div class="lesson-media"><img src="/images/agp-group.jpg" alt="リフォーマークラスの様子" loading="lazy" /></div>
+        <div class="lesson-media"><picture><source srcset="/images/agp-group.webp" type="image/webp"><img src="/images/agp-group.jpg" alt="リフォーマークラスの様子" loading="lazy" /></picture></div>
         <div class="lesson-text">
           <span class="lesson-kicker">REFORMER CLASS</span>
           <h3>リフォーマークラス</h3>
@@ -135,7 +136,7 @@
       </div>
 
       <div class="lesson-row reverse reveal">
-        <div class="lesson-media"><img src="/images/agp-tower.jpg" alt="タワークラスの様子" loading="lazy" /></div>
+        <div class="lesson-media"><picture><source srcset="/images/agp-tower.webp" type="image/webp"><img src="/images/agp-tower.jpg" alt="タワークラスの様子" loading="lazy" /></picture></div>
         <div class="lesson-text">
           <span class="lesson-kicker">TOWER CLASS</span>
           <h3>タワークラス</h3>
@@ -174,7 +175,7 @@
 
   <!-- ===== CTA ===== -->
   <section class="cta-band" id="reserve">
-    <div class="cta-bg" style="background-image:url('/images/agp-studio-mat.jpg')"></div>
+    <div class="cta-bg" style="background-image:url('/images/agp-studio-mat.jpg');background-image:image-set(url('/images/agp-studio-mat.webp') type('image/webp'), url('/images/agp-studio-mat.jpg') type('image/jpeg'))"></div>
     <div class="cta-overlay"></div>
     <div class="wrap cta-inner reveal">
       <span class="sec-label light">START</span>

@@ -26,7 +26,8 @@
 <link rel="icon" href="images/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/images/agp-studio-mat.webp" type="image/webp" fetchpriority="high" />
 <link rel="stylesheet" href="css/style.css?v=20260808b" />
 <script type="application/ld+json">
 {
@@ -122,7 +123,7 @@
 
   <!-- ===== Hero ===== -->
   <section class="hero">
-    <div class="hero-bg" style="background-image:url('images/agp-studio-mat.jpg')"></div>
+    <div class="hero-bg" style="background-image:url('images/agp-studio-mat.jpg');background-image:image-set(url('images/agp-studio-mat.webp') type('image/webp'), url('images/agp-studio-mat.jpg') type('image/jpeg'))"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-eyebrow reveal">マシンピラティスをはじめるなら</p>
@@ -173,7 +174,7 @@
 
       <div class="point-grid">
         <article class="point-card reveal">
-          <div class="point-img"><img src="images/agp-studio-wide.jpg" alt="1人1台のリフォーマーで行う少人数レッスン" loading="lazy" /></div>
+          <div class="point-img"><picture><source srcset="images/agp-studio-wide.webp" type="image/webp"><img src="images/agp-studio-wide.jpg" alt="1人1台のリフォーマーで行う少人数レッスン" loading="lazy" /></picture></div>
           <div class="point-body">
             <span class="point-no">01</span>
             <h3>1人1台・最大8名の少人数制</h3>
@@ -182,7 +183,7 @@
         </article>
 
         <article class="point-card reveal">
-          <div class="point-img"><img src="images/agp-instructor.jpg" alt="リフォーマーを使ったレッスンの様子" loading="lazy" /></div>
+          <div class="point-img"><picture><source srcset="images/agp-instructor.webp" type="image/webp"><img src="images/agp-instructor.jpg" alt="リフォーマーを使ったレッスンの様子" loading="lazy" /></picture></div>
           <div class="point-body">
             <span class="point-no">02</span>
             <h3>全員が指導員資格取得者</h3>
@@ -191,7 +192,7 @@
         </article>
 
         <article class="point-card reveal">
-          <div class="point-img"><img src="images/pilates-1.jpg" alt="24時間オンライン予約" loading="lazy" /></div>
+          <div class="point-img"><picture><source srcset="images/pilates-1.webp" type="image/webp"><img src="images/pilates-1.jpg" alt="24時間オンライン予約" loading="lazy" /></picture></div>
           <div class="point-body">
             <span class="point-no">03</span>
             <h3>24時間オンライン予約</h3>
@@ -212,7 +213,7 @@
       </header>
 
       <div class="lesson-row reveal">
-        <div class="lesson-media"><img src="images/agp-group.jpg" alt="グループレッスンの様子" loading="lazy" /></div>
+        <div class="lesson-media"><picture><source srcset="images/agp-group.webp" type="image/webp"><img src="images/agp-group.jpg" alt="グループレッスンの様子" loading="lazy" /></picture></div>
         <div class="lesson-text">
           <span class="lesson-kicker">GROUP LESSON</span>
           <h3>グループレッスン</h3>
@@ -227,7 +228,7 @@
       </div>
 
       <div class="lesson-row reverse reveal">
-        <div class="lesson-media"><img src="images/agp-private.jpg" alt="リフォーマーを使ったエクササイズ" loading="lazy" /></div>
+        <div class="lesson-media"><picture><source srcset="images/agp-private.webp" type="image/webp"><img src="images/agp-private.jpg" alt="リフォーマーを使ったエクササイズ" loading="lazy" /></picture></div>
         <div class="lesson-text">
           <span class="lesson-kicker">PRIVATE LESSON</span>
           <h3>プライベートレッスン</h3>
@@ -258,7 +259,7 @@
         </div>
       </div>
       <div class="machine-media reveal">
-        <img src="images/agp-reformer.jpg" alt="ピラティス専用マシン リフォーマー" loading="lazy" />
+        <picture><source srcset="images/agp-reformer.webp" type="image/webp"><img src="images/agp-reformer.jpg" alt="ピラティス専用マシン リフォーマー" loading="lazy" /></picture>
       </div>
     </div>
   </section>
@@ -346,7 +347,7 @@
 
   <!-- ===== Trial / Contact CTA ===== -->
   <section class="cta-band" id="trial">
-    <div class="cta-bg" style="background-image:url('images/agp-room.jpg')"></div>
+    <div class="cta-bg" style="background-image:url('images/agp-room.jpg');background-image:image-set(url('images/agp-room.webp') type('image/webp'), url('images/agp-room.jpg') type('image/jpeg'))"></div>
     <div class="cta-overlay"></div>
     <div class="wrap cta-inner reveal">
       <span class="sec-label light">START</span>
