@@ -74,6 +74,54 @@
     reveals.forEach(function (el) { el.classList.add('in'); });
   }
 
+  /* ---- GA4: reservation & tel click tracking ---- */
+  function gaSend(name, params) {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', name, params);
+    } else {
+      (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: name }, params));
+    }
+  }
+
+  // どのボタン位置からの予約かを判定
+  function ctaLocation(el) {
+    if (el.closest('#navBook')) return 'header_dropdown';
+    if (el.closest('.hero')) return 'hero';
+    if (el.closest('.campaign')) return 'campaign';
+    if (el.closest('.price')) return 'pricing';
+    if (el.closest('.flow')) return 'flow';
+    if (el.closest('.cta-band')) return 'cta_band';
+    if (el.closest('.site-footer')) return 'footer';
+    var sec = el.closest('section');
+    return (sec && sec.id) ? sec.id : 'other';
+  }
+
+  document.querySelectorAll('a[href*="hacomono"]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var href = a.getAttribute('href') || '';
+      var lesson = /\/59(\b|$|\/|\?)/.test(href) ? 'private'
+                 : /\/58(\b|$|\/|\?)/.test(href) ? 'group'
+                 : 'unknown';
+      gaSend('reserve_click', {
+        lesson_type: lesson,
+        cta_location: ctaLocation(a),
+        page_path: location.pathname,
+        link_url: href,
+        transport_type: 'beacon'
+      });
+    });
+  });
+
+  document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      gaSend('tel_click', {
+        cta_location: ctaLocation(a),
+        page_path: location.pathname,
+        transport_type: 'beacon'
+      });
+    });
+  });
+
   /* ---- FAQ: only one open at a time ---- */
   var faqItems = document.querySelectorAll('.faq-list details');
   faqItems.forEach(function (item) {
