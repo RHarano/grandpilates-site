@@ -74,6 +74,40 @@
     reveals.forEach(function (el) { el.classList.add('in'); });
   }
 
+  /* ---- Sticky booking bar (appears on scroll, dismissible) ---- */
+  (function () {
+    var KEY = 'agp_bookbar_closed';
+    try { if (sessionStorage.getItem(KEY) === '1') return; } catch (e) {}
+
+    var bar = document.createElement('div');
+    bar.className = 'book-bar';
+    bar.setAttribute('role', 'complementary');
+    bar.setAttribute('aria-label', '体験レッスン予約');
+    bar.innerHTML =
+      '<button class="bb-close" aria-label="閉じる">&times;</button>' +
+      '<p class="bb-copy"><span class="bb-lead">初回体験 受付中</span> <span class="bb-price"><b>グループ ¥1,100</b> ／ <b>プライベート ¥3,300</b></span></p>' +
+      '<div class="bb-actions">' +
+      '<a class="bb-btn bb-gold" href="https://grandlohas.hacomono.jp/reserve/schedule/6/58" target="_blank" rel="noopener">グループ体験を予約</a>' +
+      '<a class="bb-btn bb-line" href="https://grandlohas.hacomono.jp/reserve/schedule/6/59" target="_blank" rel="noopener">プライベート体験を予約</a>' +
+      '</div>';
+    document.body.appendChild(bar);
+
+    bar.querySelector('.bb-close').addEventListener('click', function () {
+      bar.classList.remove('show');
+      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+    });
+
+    // ヒーロー/サブヒーローを過ぎたら表示
+    var trigger = document.querySelector('.hero, .subhero');
+    var threshold = trigger ? Math.max(trigger.offsetHeight - 120, 300) : 500;
+    function toggleBar() {
+      if (window.scrollY > threshold) bar.classList.add('show');
+      else bar.classList.remove('show');
+    }
+    window.addEventListener('scroll', toggleBar, { passive: true });
+    toggleBar();
+  })();
+
   /* ---- GA4: reservation & tel click tracking ---- */
   function gaSend(name, params) {
     if (typeof window.gtag === 'function') {
@@ -85,6 +119,7 @@
 
   // どのボタン位置からの予約かを判定
   function ctaLocation(el) {
+    if (el.closest('.book-bar')) return 'sticky_bar';
     if (el.closest('#navBook')) return 'header_dropdown';
     if (el.closest('.hero')) return 'hero';
     if (el.closest('.campaign')) return 'campaign';

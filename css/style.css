@@ -521,6 +521,54 @@ a{color:inherit;text-decoration:none}
   .tbl td{font-size:.96rem}
 }
 
+/* ---------- Sticky booking bar (subtle, dismissible) ---------- */
+.book-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:80;
+  display:flex;align-items:center;gap:18px;justify-content:center;flex-wrap:wrap;
+  padding:12px 20px;
+  background:rgba(38,34,29,.96);backdrop-filter:blur(8px);
+  border-top:1px solid rgba(216,192,138,.5);
+  box-shadow:0 -10px 30px -14px rgba(0,0,0,.5);
+  transform:translateY(120%);transition:transform .5s cubic-bezier(.6,0,.25,1);
+}
+.book-bar.show{transform:translateY(0)}
+.book-bar .bb-copy{color:#fff;font-size:.9rem;letter-spacing:.04em;line-height:1.4}
+.book-bar .bb-copy b{color:var(--gold-light);font-family:var(--jp-serif);font-weight:600}
+.book-bar .bb-actions{display:flex;gap:10px;flex-wrap:wrap}
+.book-bar a.bb-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:11px 22px;border-radius:999px;font-weight:700;font-size:.88rem;letter-spacing:.04em;
+  transition:transform .3s ease, box-shadow .3s ease, background .3s ease, color .3s ease;white-space:nowrap;
+}
+.book-bar a.bb-btn:hover{transform:translateY(-2px)}
+.book-bar a.bb-gold{background:linear-gradient(135deg,var(--gold-light),var(--gold) 55%,var(--gold-deep));color:#fff;box-shadow:0 10px 22px -12px rgba(169,133,63,.8)}
+.book-bar a.bb-line{border:1.5px solid rgba(255,255,255,.6);color:#fff}
+.book-bar a.bb-line:hover{background:#fff;color:var(--ink)}
+.book-bar .bb-close{
+  position:absolute;top:6px;right:10px;width:26px;height:26px;border:0;cursor:pointer;
+  background:transparent;color:rgba(255,255,255,.65);font-size:1.2rem;line-height:1;border-radius:50%;
+}
+.book-bar .bb-close:hover{color:#fff;background:rgba(255,255,255,.12)}
+@media (max-width:768px){
+  .book-bar{gap:8px;padding:10px 10px 12px}
+  .book-bar .bb-copy{width:100%;min-width:0;display:flex;flex-direction:column;gap:1px;text-align:center;font-size:.76rem;padding:0 26px}
+  .book-bar .bb-actions{width:100%;justify-content:center;gap:8px}
+  .book-bar a.bb-btn{flex:1 1 0;min-width:0;justify-content:center;max-width:none;padding:12px 6px;font-size:.8rem}
+}
+body.menu-open .book-bar{display:none}
+
+/* ---------- Inline booking button (under price tables) ---------- */
+.price-book{display:flex;justify-content:center;margin-top:28px}
+.price-book a{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold) 55%,var(--gold-deep));color:#fff;
+  padding:15px 34px;border-radius:999px;font-weight:700;letter-spacing:.05em;
+  box-shadow:0 12px 28px -12px rgba(169,133,63,.75);transition:transform .3s ease, box-shadow .3s ease;
+}
+.price-book a:hover{transform:translateY(-3px);box-shadow:0 18px 34px -12px rgba(169,133,63,.9)}
+.price-book a .arrow{font-family:var(--serif);font-weight:400;transition:transform .3s ease}
+.price-book a:hover .arrow{transform:translateX(5px)}
+
 /* ---------- Reveal animation ---------- */
 .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease, transform .9s ease}
 .reveal.in{opacity:1;transform:none}
