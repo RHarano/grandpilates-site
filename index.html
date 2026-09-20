@@ -9,16 +9,24 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+  // ① 既存のピラティス専用プロパティ（551863270）。従来どおり、変更なし。
   gtag('config', 'G-MD1QTQQX66');
+
+  // ② LOHASグループ計測プロパティ（548620843）。
+  //    LP3本と hacomono が使っているIDと同じものを併記する。
+  //    hacomono と同一プロパティになるため、予約完了まで1つのプロパティで追える。
+  //    HPとLPはGA4の「ホスト名」で切り分けられる。
+  //    ※ 別プロパティ宛のIDを2つ置くのは二重計測ではない（同じIDを2回configすると二重になる）
+  gtag('config', 'G-2FK4EYF80H');
 </script>
 <title>阿佐ヶ谷のマシンピラティス専門スタジオ｜ASAGAYA GRAND PILATES</title>
-<meta name="description" content="阿佐ヶ谷駅徒歩5分のマシンピラティス専門スタジオ。リフォーマー1人1台・最大8名の少人数制で、全インストラクターが指導員資格取得者。初回体験¥1,100。姿勢改善・ボディメイク・初心者にもおすすめ。杉並区阿佐ヶ谷南。" />
+<meta name="description" content="阿佐ヶ谷駅徒歩5分のマシンピラティス専門スタジオ。リフォーマーをお一人につき1台・最大8名の少人数制で、全インストラクターが指導資格を保有。初回体験¥1,100。姿勢改善・ボディメイク・初心者にもおすすめ。杉並区阿佐谷南。" />
 <meta name="keywords" content="阿佐ヶ谷 ピラティス,阿佐ヶ谷 マシンピラティス,マシンピラティス 阿佐ヶ谷,南阿佐ヶ谷 ピラティス,杉並区 ピラティス,リフォーマー,ピラティス 体験,ピラティス 少人数" />
 <link rel="canonical" href="https://grandpilates.site/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ASAGAYA GRAND PILATES" />
 <meta property="og:title" content="阿佐ヶ谷のマシンピラティス専門スタジオ｜ASAGAYA GRAND PILATES" />
-<meta property="og:description" content="阿佐ヶ谷駅徒歩5分。リフォーマー1人1台・最大8名の少人数制マシンピラティス専門スタジオ。初回体験¥1,100。姿勢改善・ボディメイクに。" />
+<meta property="og:description" content="阿佐ヶ谷駅徒歩5分。リフォーマーをお一人につき1台・最大8名の少人数制マシンピラティス専門スタジオ。初回体験¥1,100。姿勢改善・ボディメイクに。" />
 <meta property="og:url" content="https://grandpilates.site/" />
 <meta property="og:image" content="https://grandpilates.site/images/agp-studio-wide.jpg" />
 <meta property="og:locale" content="ja_JP" />
@@ -28,7 +36,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet" />
 <link rel="preload" as="image" href="/images/agp-studio-mat.webp" type="image/webp" fetchpriority="high" />
-<link rel="stylesheet" href="css/style.css?v=20260910a" />
+<link rel="stylesheet" href="css/style.css?v=7d84747d" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -36,7 +44,7 @@
   "@id": "https://grandpilates.site/#studio",
   "name": "ASAGAYA GRAND PILATES",
   "alternateName": "阿佐ヶ谷グランドピラティス",
-  "description": "阿佐ヶ谷駅徒歩5分のマシンピラティス専門スタジオ。リフォーマー1人1台・最大8名の少人数制で、全インストラクターが指導員資格取得者。初回体験¥1,100。",
+  "description": "阿佐ヶ谷駅徒歩5分のマシンピラティス専門スタジオ。リフォーマーをお一人につき1台・最大8名の少人数制で、全インストラクターが指導資格を保有。初回体験¥1,100。",
   "url": "https://grandpilates.site/",
   "telephone": "+81-3-3311-8211",
   "image": "https://grandpilates.site/images/agp-studio-wide.jpg",
@@ -49,7 +57,7 @@
     "postalCode": "166-0004",
     "addressRegion": "東京都",
     "addressLocality": "杉並区",
-    "streetAddress": "阿佐ヶ谷南1-36-4 三幸ビル2F",
+    "streetAddress": "阿佐谷南1-36-4 三幸ビル 2F",
     "addressCountry": "JP"
   },
   "geo": {
@@ -57,7 +65,11 @@
     "latitude": 35.7040,
     "longitude": 139.6360
   },
-  "hasMap": "https://www.google.com/maps/search/?api=1&query=東京都杉並区阿佐ヶ谷南1-36-4",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "09:30", "closes": "21:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "08:00", "closes": "17:00" }
+  ],
+  "hasMap": "https://www.google.com/maps/search/?api=1&query=東京都杉並区阿佐谷南1-36-4",
   "areaServed": ["阿佐ヶ谷", "南阿佐ヶ谷", "高円寺", "荻窪", "杉並区"],
   "knowsAbout": ["マシンピラティス", "リフォーマー", "ピラティス", "姿勢改善", "ボディメイク"],
   "sameAs": [
@@ -94,9 +106,49 @@
     {"@type": "Question", "name": "運動が苦手・初心者でも大丈夫ですか？", "acceptedAnswer": {"@type": "Answer", "text": "もちろん大丈夫です。マシンが動きをサポートしてくれるため、運動が苦手な方や初めての方でも正しいフォームで取り組めます。資格を持つインストラクターが一人ひとりに合わせて丁寧にご案内します。"}},
     {"@type": "Question", "name": "体験レッスンには何を持っていけばいいですか？", "acceptedAnswer": {"@type": "Answer", "text": "動きやすい服装（Tシャツ・レギンス等）でお越しください。靴下があると快適にご参加いただけます。詳しいご案内はご予約時にお伝えします。"}},
     {"@type": "Question", "name": "予約はどのように行いますか？", "acceptedAnswer": {"@type": "Answer", "text": "24時間対応のオンライン予約、または受付時間内のお電話で承っております。予約の変更もスマホから簡単に行えます。"}},
-    {"@type": "Question", "name": "グループとプライベート、どちらが向いていますか？", "acceptedAnswer": {"@type": "Answer", "text": "仲間と楽しく続けたい方はグループ、体の悩みや目標に合わせて集中的に取り組みたい方はプライベートがおすすめです。両方を組み合わせたプランもご用意しています。"}},
+    {"@type": "Question", "name": "グループとプライベート、どちらが向いていますか？", "acceptedAnswer": {"@type": "Answer", "text": "仲間と楽しく続けたい方はグループ、身体の悩みや目標に合わせて集中的に取り組みたい方はプライベートがおすすめです。両方を組み合わせたプランもご用意しています。"}},
     {"@type": "Question", "name": "駐輪場や最寄り駅からのアクセスは？", "acceptedAnswer": {"@type": "Answer", "text": "JR阿佐ヶ谷駅から徒歩約5分です。詳しい場所はアクセス欄の地図をご確認ください。"}}
   ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://grandpilates.site/#organization",
+  "name": "ASAGAYA GRAND PILATES",
+  "alternateName": "阿佐ヶ谷グランドピラティス",
+  "url": "https://grandpilates.site/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://grandpilates.site/images/logo.png"
+  },
+  "telephone": "+81-3-3311-8211",
+  "email": "gp.asagaya-info@likefit.co.jp",
+  "address": {
+    "@type": "PostalAddress",
+    "postalCode": "166-0004",
+    "addressRegion": "東京都",
+    "addressLocality": "杉並区",
+    "streetAddress": "阿佐谷南1-36-4 三幸ビル2F",
+    "addressCountry": "JP"
+  },
+  "sameAs": [
+    "https://www.instagram.com/asagaya_grand_pilates/"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://grandpilates.site/#website",
+  "name": "ASAGAYA GRAND PILATES",
+  "url": "https://grandpilates.site/",
+  "inLanguage": "ja",
+  "publisher": {
+    "@id": "https://grandpilates.site/#organization"
+  }
 }
 </script>
 </head>
@@ -106,7 +158,7 @@
 <header class="site-header" id="header">
   <div class="header-inner">
     <a href="#top" class="brand" aria-label="ASAGAYA GRAND PILATES ホーム">
-      <img src="images/logo.png" alt="" class="brand-mark" />
+      <img width="696" height="680" src="images/logo.png" alt="" class="brand-mark" />
       <span class="brand-text">
         <span class="brand-en">GRAND&nbsp;PILATES</span>
         <span class="brand-ja">阿佐ヶ谷 マシンピラティス専門スタジオ</span>
@@ -116,8 +168,9 @@
     <nav class="nav" id="nav" aria-label="メインナビゲーション">
       <a href="/group/"><span class="n-en">GROUP</span><span class="n-jp">グループ</span></a>
       <a href="/private/"><span class="n-en">PRIVATE</span><span class="n-jp">プライベート</span></a>
-      <a href="#price"><span class="n-en">PRICE</span><span class="n-jp">料金プラン</span></a>
-      <a href="#faq"><span class="n-en">FAQ</span><span class="n-jp">よくある質問</span></a>
+      <a href="/price/"><span class="n-en">PRICE</span><span class="n-jp">料金プラン</span></a>
+      <a href="/faq/"><span class="n-en">FAQ</span><span class="n-jp">よくある質問</span></a>
+      <a href="/blog/"><span class="n-en">COLUMN</span><span class="n-jp">コラム</span></a>
       <a href="#access"><span class="n-en">ACCESS</span><span class="n-jp">アクセス</span></a>
       <a href="/contact/"><span class="n-en">CONTACT</span><span class="n-jp">お問い合わせ</span></a>
       <div class="nav-book" id="navBook">
@@ -125,6 +178,7 @@
         <div class="nav-drop">
           <a href="https://grandlohas.hacomono.jp/reserve/schedule/6/58" target="_blank" rel="noopener" class="nd-group">グループ体験<small>初回 ¥1,100</small></a>
           <a href="https://grandlohas.hacomono.jp/reserve/schedule/6/59" target="_blank" rel="noopener" class="nd-private">プライベート体験<small>初回 ¥3,300</small></a>
+          <a href="/trial/" class="nd-about">体験について詳しく<small>流れ・服装・持ち物</small></a>
         </div>
       </div>
       <a href="tel:0333118211" class="nav-tel">☎ 03-3311-8211</a>
@@ -144,13 +198,14 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-eyebrow reveal">マシンピラティスをはじめるなら</p>
-      <h1 class="hero-title reveal">
+      <p class="hero-title reveal" aria-hidden="true">
         <span class="line">GRAND</span>
         <span class="line">PILATES <span class="he">へ</span></span>
-      </h1>
+      </p>
+        <h1 class="hero-h1 reveal">阿佐ヶ谷のマシンピラティス専門スタジオ</h1>
       <p class="hero-lead reveal">
         阿佐ヶ谷駅から徒歩5分。<br />
-        “本物”の指導と設備で、しなやかに変わる自分へ。
+        資格を持つインストラクターと充実した設備で、しなやかに動ける身体へ。
       </p>
       <div class="hero-actions reveal">
         <a href="#lessons" class="btn btn-gold">レッスンを見る</a>
@@ -171,16 +226,46 @@
     <div class="wrap concept-inner">
       <div class="concept-head reveal">
         <span class="sec-label">CONCEPT</span>
-        <h2 class="sec-title">“本物”のマシンピラティスを、<br />阿佐ヶ谷で。</h2>
+        <h2 class="sec-title">少人数で丁寧に学べるマシンピラティスを、<br />阿佐ヶ谷で。</h2>
       </div>
       <div class="concept-body reveal">
-        <p>ASAGAYA GRAND PILATES は、リフォーマー・タワーを備えたマシンピラティスの専門スタジオです。1人1台のマシンと最大8名の少人数制、そして指導員資格を持つインストラクターによる丁寧なレッスンで、お一人おひとりの身体と向き合います。</p>
+        <p><strong>阿佐ヶ谷駅から徒歩約5分。</strong>ASAGAYA GRAND PILATES は、リフォーマーをお一人につき1台使用する<strong>マシンピラティス専門スタジオ</strong>です。<strong>最大8名の少人数グループレッスン</strong>と、<strong>専用個室で行うプライベートレッスン</strong>をご用意しています。</p>
+          <p>指導資格を持つインストラクターが、姿勢や身体の状態、目的に合わせて丁寧にサポートします。初回体験はグループ¥1,100、プライベート¥3,300（いずれも税込）です。</p>
         <p>姿勢を整えたい方、しなやかな身体をつくりたい方、運動が苦手な方も。日々の暮らしのなかで無理なく続けられる場所として、地域に根ざしたスタジオを目指しています。</p>
       </div>
     </div>
   </section>
 
   <!-- ===== Points ===== -->
+  <!-- ===== お悩み・目的から探す ===== -->
+  <section class="section needs" id="needs" style="padding-top:0">
+    <div class="wrap wrap-narrow">
+      <header class="sec-head reveal">
+        <span class="sec-label">GUIDE</span>
+        <h2 class="sec-title">こんなお悩み、<span class="gold">ありませんか？</span></h2>
+      </header>
+
+      <ul class="needs-list reveal">
+        <li>姿勢の崩れや猫背が気になり、写真の自分にがっかりする</li>
+        <li>運動は苦手。ハードなトレーニングは続いた試しがない</li>
+        <li>肩こり・腰まわりの重さを、根本から整えたい</li>
+        <li>大人数のレッスンだと、ついていけるか不安</li>
+      </ul>
+
+      <p class="needs-close reveal">
+        その原因は、頑張りが足りないからではなく<br class="sp-br" />
+        <strong>「身体の使い方のクセ」</strong>かもしれません。
+      </p>
+
+      <div class="needs-links reveal">
+        <a href="/trial/">体験レッスンの流れと持ち物を見る</a>
+        <a href="/about/">マシンピラティスの特徴を見る</a>
+        <a href="/price/">料金プランとプランの選び方を見る</a>
+        <a href="/blog/">コラムで詳しく読む</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section points" id="points">
     <div class="wrap">
       <header class="sec-head reveal">
@@ -191,25 +276,25 @@
 
       <div class="point-grid">
         <article class="point-card reveal">
-          <div class="point-img"><picture><source srcset="images/agp-studio-wide.webp" type="image/webp"><img src="images/agp-studio-wide.jpg" alt="1人1台のリフォーマーで行う少人数レッスン" loading="lazy" /></picture></div>
+          <div class="point-img"><picture><source srcset="images/agp-studio-reformers.webp" type="image/webp"><img width="1920" height="1280" src="images/agp-studio-reformers.jpg" alt="1人1台ずつ並んだリフォーマー" loading="lazy" /></picture></div>
           <div class="point-body">
             <span class="point-no">01</span>
             <h3>1人1台・最大8名の少人数制</h3>
-            <p>リフォーマータワーを1人1台使用。最大8名の少人数だから、一人ひとりの動きに目が届き、丁寧にサポートします。</p>
+            <p>リフォーマー・タワーを、お一人につき1台ご用意しています。最大8名の少人数制なので、一人ひとりの動きに目が届き、丁寧にサポートします。</p>
           </div>
         </article>
 
         <article class="point-card reveal">
-          <div class="point-img"><picture><source srcset="images/agp-instructor.webp" type="image/webp"><img src="images/agp-instructor.jpg" alt="リフォーマーを使ったレッスンの様子" loading="lazy" /></picture></div>
+          <div class="point-img"><picture><source srcset="images/agp-instructor.webp" type="image/webp"><img width="1600" height="1067" src="images/agp-instructor.jpg" alt="リフォーマーを使ったレッスンの様子" loading="lazy" /></picture></div>
           <div class="point-body">
             <span class="point-no">02</span>
-            <h3>全員が指導員資格取得者</h3>
-            <p>在籍するインストラクターは全員が指導員資格取得者。姿勢・骨格・目的に合わせた的確なレッスンをお届けします。</p>
+            <h3>全インストラクターが指導資格を保有</h3>
+            <p>在籍するインストラクターは、全員がピラティスの指導資格を保有しています。姿勢や身体の状態、目的に合わせて、一人ひとりを丁寧にサポートします。</p>
           </div>
         </article>
 
         <article class="point-card reveal">
-          <div class="point-img"><picture><source srcset="images/pilates-1.webp" type="image/webp"><img src="images/pilates-1.jpg" alt="24時間オンライン予約" loading="lazy" /></picture></div>
+          <div class="point-img"><picture><source srcset="images/pilates-1.webp" type="image/webp"><img width="640" height="427" src="images/pilates-1.jpg" alt="24時間オンライン予約" loading="lazy" /></picture></div>
           <div class="point-body">
             <span class="point-no">03</span>
             <h3>24時間オンライン予約</h3>
@@ -230,7 +315,7 @@
       </header>
 
       <div class="lesson-row reveal">
-        <div class="lesson-media"><picture><source srcset="images/agp-group.webp" type="image/webp"><img src="images/agp-group.jpg" alt="グループレッスンの様子" loading="lazy" /></picture></div>
+        <div class="lesson-media"><picture><source srcset="images/agp-group.webp" type="image/webp"><img width="1600" height="1067" src="images/agp-group.jpg" alt="グループレッスンの様子" loading="lazy" /></picture></div>
         <div class="lesson-text">
           <span class="lesson-kicker">GROUP LESSON</span>
           <h3>グループレッスン</h3>
@@ -245,11 +330,11 @@
       </div>
 
       <div class="lesson-row reverse reveal">
-        <div class="lesson-media"><picture><source srcset="images/agp-private.webp" type="image/webp"><img src="images/agp-private.jpg" alt="リフォーマーを使ったエクササイズ" loading="lazy" /></picture></div>
+        <div class="lesson-media"><picture><source srcset="images/agp-private.webp" type="image/webp"><img width="1600" height="1280" src="images/agp-private.jpg" alt="リフォーマーを使ったエクササイズ" loading="lazy" /></picture></div>
         <div class="lesson-text">
           <span class="lesson-kicker">PRIVATE LESSON</span>
           <h3>プライベートレッスン</h3>
-          <p>専用個室でマンツーマン指導。体の悩みや目標に合わせて、あなただけのプログラムを設計します。周りの目を気にせず、集中して取り組みたい方におすすめです。</p>
+          <p>専用個室でマンツーマン指導。身体のお悩みや目標、その日のコンディションに合わせて、一人ひとりに適したレッスンをご提案します。周りの目を気にせず、集中して取り組みたい方におすすめです。</p>
           <ul class="ticks">
             <li>プライベートレッスン専用の個室を完備</li>
             <li>姿勢・不調・ボディメイクを個別にサポート</li>
@@ -271,12 +356,16 @@
         <p>姿勢改善、肩こり・腰まわりのケア、しなやかなボディメイクまで。運動が苦手な方や初心者の方こそ、無理なく続けられるのが魅力です。</p>
         <div class="machine-facts">
           <div><b>姿勢改善</b><span>体幹から整える</span></div>
-          <div><b>しなやかな体</b><span>効率的なボディメイク</span></div>
+          <div><b>しなやかな身体</b><span>効率的なボディメイク</span></div>
           <div><b>初心者歓迎</b><span>マシンが動きをサポート</span></div>
+        </div>
+        <div class="sec-more reveal" style="text-align:left">
+          <a href="/about/">マシンピラティスとは？リフォーマー・マットとの違いを見る<span class="arrow">→</span></a><br />
+          <a href="/pilates-yoga/">ピラティスとヨガの違いを見る<span class="arrow">→</span></a>
         </div>
       </div>
       <div class="machine-media reveal">
-        <picture><source srcset="images/agp-reformer.webp" type="image/webp"><img src="images/agp-reformer.jpg" alt="ピラティス専用マシン リフォーマー" loading="lazy" /></picture>
+        <picture><source srcset="images/agp-reformer-footbar.webp" type="image/webp"><img width="1920" height="1280" src="images/agp-reformer-footbar.jpg" alt="ピラティス専用マシン リフォーマー" loading="lazy" /></picture>
       </div>
     </div>
   </section>
@@ -286,7 +375,7 @@
     <div class="wrap">
       <header class="sec-head reveal">
         <span class="sec-label">PRICE</span>
-        <h2 class="sec-title">月会員<span class="gold">オススメプラン</span></h2>
+        <h2 class="sec-title">おすすめの<span class="gold">月会員プラン</span></h2>
         <p class="sec-desc">ライフスタイルに合わせて選べる、続けやすい月額制。</p>
       </header>
 
@@ -299,7 +388,7 @@
             <div class="plan-row"><span>マンスリー8<small>月8回</small></span><b>¥21,780<i>/月（税込）</i></b></div>
           </div>
           <ul class="plan-feat">
-            <li>1人1台リフォーマー使用</li>
+            <li>リフォーマーをお一人につき1台</li>
             <li>リフォーマー／タワーの多彩なクラス</li>
             <li>24時間オンライン予約</li>
           </ul>
@@ -314,13 +403,17 @@
           </div>
           <ul class="plan-feat">
             <li>専用個室でのマンツーマン指導</li>
-            <li>1人1台リフォーマー使用</li>
+            <li>リフォーマーをお一人につき1台</li>
             <li>24時間オンライン予約</li>
           </ul>
           <a href="/private/" class="btn btn-ghost-dark">プラン詳細を見る</a>
         </article>
       </div>
       <p class="price-note reveal">※ 表示価格はすべて税込です。別途、月額の施設利用料 ¥550 を頂戴しております。</p>
+      <div class="sec-more reveal">
+        <a href="/price/">体験・都度利用を含む料金一覧と、プランの選び方を見る<span class="arrow">→</span></a><br />
+        <a href="/campaign/">体験当日のご入会で、入会金・登録料・1ヶ月分の月会費が0円<span class="arrow">→</span></a>
+      </div>
     </div>
   </section>
 
@@ -342,7 +435,7 @@
         <li class="reveal">
           <span class="step-no">STEP 02</span>
           <h3>来店・カウンセリング</h3>
-          <p>体の状態やお悩み、目的をヒアリング。動きやすい服装でお越しください。</p>
+          <p>身体の状態やお悩み、目的をヒアリング。動きやすい服装でお越しください。</p>
         </li>
         <li class="reveal">
           <span class="step-no">STEP 03</span>
@@ -357,14 +450,14 @@
       </ol>
 
       <div class="flow-cta reveal">
-        <a href="#trial" class="btn btn-gold btn-lg">体験予約について</a>
+        <a href="/trial/" class="btn btn-gold btn-lg">体験レッスンについて詳しく</a>
       </div>
     </div>
   </section>
 
   <!-- ===== Trial / Contact CTA ===== -->
   <section class="cta-band" id="trial">
-    <div class="cta-bg" style="background-image:url('images/agp-room.jpg');background-image:image-set(url('images/agp-room.webp') type('image/webp'), url('images/agp-room.jpg') type('image/jpeg'))"></div>
+    <div class="cta-bg" style="background-image:url('images/agp-studio-reformers-2.jpg');background-image:image-set(url('images/agp-studio-reformers-2.webp') type('image/webp'), url('images/agp-studio-reformers-2.jpg') type('image/jpeg'))"></div>
     <div class="cta-overlay"></div>
     <div class="wrap cta-inner reveal">
       <span class="sec-label light">START</span>
@@ -407,12 +500,25 @@
         </details>
         <details class="reveal">
           <summary>グループとプライベート、どちらが向いていますか？</summary>
-          <div class="faq-a"><p>仲間と楽しく続けたい方はグループ、体の悩みや目標に合わせて集中的に取り組みたい方はプライベートがおすすめです。両方を組み合わせたプランもご用意しています。まずは体験でお気軽にご相談ください。</p></div>
+          <div class="faq-a"><p>仲間と楽しく続けたい方はグループ、身体の悩みや目標に合わせて集中的に取り組みたい方はプライベートがおすすめです。両方を組み合わせたプランもご用意しています。まずは体験でお気軽にご相談ください。</p></div>
         </details>
         <details class="reveal">
           <summary>駐輪場や最寄り駅からのアクセスは？</summary>
           <div class="faq-a"><p>JR阿佐ヶ谷駅から徒歩約5分です。詳しい場所は下記アクセス欄の地図をご確認ください。</p></div>
         </details>
+      </div>
+
+      <div class="sec-more reveal">
+        <a href="/faq/">よくあるご質問をすべて見る（24問）<span class="arrow">→</span></a>
+      </div>
+
+      <div class="faq-help reveal">
+        <p class="fh-title">お探しの答えが見つかりませんでしたか？</p>
+        <p class="fh-text">ここに載っていないご質問も、お電話・メールで承っております。<br />体験の前に確認しておきたいことがあれば、遠慮なくおたずねください。</p>
+        <div class="fh-actions">
+          <a href="tel:0333118211" class="btn btn-gold">電話で相談する（03-3311-8211）</a>
+          <a href="/contact/" class="btn btn-ghost-dark">お問い合わせページへ</a>
+        </div>
       </div>
     </div>
   </section>
@@ -423,24 +529,25 @@
       <header class="sec-head reveal">
         <span class="sec-label">ACCESS</span>
         <h2 class="sec-title">アクセス</h2>
-        <p class="sec-desc">JR阿佐ヶ谷駅から徒歩5分。</p>
+        <p class="sec-desc">JR阿佐ヶ谷駅から徒歩5分。高円寺・荻窪・南阿佐ヶ谷からも通いやすい立地です。</p>
       </header>
 
       <div class="access-grid">
         <div class="access-info reveal">
           <dl>
             <div><dt>スタジオ名</dt><dd>ASAGAYA GRAND PILATES</dd></div>
-            <div><dt>住所</dt><dd>〒166-0004<br />東京都杉並区阿佐ヶ谷南1-36-4 三幸ビル2F</dd></div>
-            <div><dt>アクセス</dt><dd>JR中央線・総武線「阿佐ヶ谷駅」より徒歩約5分</dd></div>
+            <div><dt>住所</dt><dd>〒166-0004<br />東京都杉並区阿佐谷南1-36-4 三幸ビル 2F</dd></div>
+            <div><dt>アクセス</dt><dd>JR中央線・総武線「阿佐ヶ谷駅」より徒歩約5分<br />東京メトロ丸ノ内線「南阿佐ヶ谷駅」からも徒歩約5分です。<br />高円寺・荻窪からは一駅の距離です。</dd></div>
+            <div><dt>営業時間</dt><dd>平日　9:30 – 21:30<br />土日　8:00 – 17:00<br /><b>定休日：月曜</b></dd></div>
             <div><dt>電話</dt><dd><a href="tel:0333118211">03-3311-8211</a></dd></div>
             <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/asagaya_grand_pilates/" target="_blank" rel="noopener">@asagaya_grand_pilates</a></dd></div>
           </dl>
-          <a href="https://www.google.com/maps/search/?api=1&query=東京都杉並区阿佐ヶ谷南1-36-4" target="_blank" rel="noopener" class="btn btn-ghost-dark">Googleマップで開く</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=東京都杉並区阿佐谷南1-36-4" target="_blank" rel="noopener" class="btn btn-ghost-dark">Googleマップで開く</a>
         </div>
         <div class="access-map reveal">
           <iframe
             title="ASAGAYA GRAND PILATES 地図"
-            src="https://www.google.com/maps?q=東京都杉並区阿佐ヶ谷南1-36-4&output=embed"
+            src="https://www.google.com/maps?q=東京都杉並区阿佐谷南1-36-4&output=embed"
             loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
@@ -449,22 +556,48 @@
 
 </main>
 
+<!-- ===== 系列施設への導線（2026-09-11 追加） ===== -->
+<section class="group-band">
+  <div class="wrap">
+    <p class="gb-label">SAME BUILDING</p>
+    <h2 class="gb-title">岩盤浴も、ヨガも、同じビルで。</h2>
+    <p class="gb-lead">どちらも阿佐ヶ谷・三幸ビルの中にあります。</p>
+    <div class="gb-grid">
+      <a href="https://tokyoganbanyoku.com/" class="gb-card" target="_blank" rel="noopener">
+        <span class="gb-en">TOKYO GANBANYOKU</span>
+        <span class="gb-name">東京岩盤浴</span>
+        <span class="gb-floor">三幸ビル 2F（当スタジオと同じ階）</span>
+        <span class="gb-desc">日本最大級の岩盤浴と<br>ハーバルテントサウナ</span>
+        <span class="gb-go">サイトを見る →</span>
+      </a>
+      <a href="https://lohas-lohas-studio.com/" class="gb-card" target="_blank" rel="noopener">
+        <span class="gb-en">LOHAS LOHAS</span>
+        <span class="gb-name">LOHAS LOHAS Studio</span>
+        <span class="gb-floor">三幸ビル 3F</span>
+        <span class="gb-desc">ヨガ・ホットヨガ・<br>ピラティスのスタジオ</span>
+        <span class="gb-go">サイトを見る →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ===== Footer ===== -->
 <footer class="site-footer">
   <div class="wrap footer-top">
 
     <div class="f-brand">
       <a href="/" class="f-logo">
-        <img src="images/logo.png" alt="" />
+        <img width="696" height="680" src="images/logo.png" alt="" />
         <span class="f-logo-text">
           <b>ASAGAYA GRAND PILATES</b>
           <small>阿佐ヶ谷 マシンピラティス専門スタジオ</small>
         </span>
       </a>
       <address class="f-address">
-        〒166-0004 東京都杉並区阿佐ヶ谷南1-36-4 三幸ビル2F<br />
+        〒166-0004 東京都杉並区阿佐谷南1-36-4 三幸ビル 2F<br />
         JR中央線・総武線「阿佐ヶ谷駅」より徒歩約5分
       </address>
+      <p class="f-hours">平日 9:30 – 21:30／土日 8:00 – 17:00<br />定休日：月曜</p>
       <div class="f-social">
         <a href="tel:0333118211" class="pill-btn pill-tel">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.56 1 1 0 0 1-.25 1.01Z"/></svg>
@@ -481,16 +614,20 @@
       <p class="f-col-title"><span class="en">LESSON</span>レッスン</p>
       <a href="/group/">グループレッスン</a>
       <a href="/private/">プライベートレッスン</a>
-      <a href="/#machine">マシンピラティスとは</a>
+      <a href="/about/">マシンピラティスとは</a>
+      <a href="/pilates-yoga/">ピラティスとヨガの違い</a>
     </nav>
 
     <nav class="f-col" aria-label="ご案内">
       <p class="f-col-title"><span class="en">GUIDE</span>ご案内</p>
-      <a href="/#price">料金プラン</a>
-      <a href="/#flow">体験の流れ</a>
-      <a href="/#faq">よくあるご質問</a>
+      <a href="/price/">料金プラン</a>
+      <a href="/campaign/">キャンペーン</a>
+      <a href="/trial/">体験レッスン</a>
+      <a href="/blog/">コラム</a>
+      <a href="/faq/">よくあるご質問</a>
       <a href="/#access">アクセス</a>
       <a href="/contact/">お問い合わせ</a>
+      <a href="/privacy/">プライバシーポリシー</a>
     </nav>
 
     <div class="f-col f-reserve">
@@ -511,6 +648,6 @@
 </footer>
 
 
-<script src="js/main.js?v=20260910a"></script>
+<script src="js/main.js?v=7b60f415"></script>
 </body>
 </html>

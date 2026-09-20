@@ -9,7 +9,15 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+  // ① 既存のピラティス専用プロパティ（551863270）。従来どおり、変更なし。
   gtag('config', 'G-MD1QTQQX66');
+
+  // ② LOHASグループ計測プロパティ（548620843）。
+  //    LP3本と hacomono が使っているIDと同じものを併記する。
+  //    hacomono と同一プロパティになるため、予約完了まで1つのプロパティで追える。
+  //    HPとLPはGA4の「ホスト名」で切り分けられる。
+  //    ※ 別プロパティ宛のIDを2つ置くのは二重計測ではない（同じIDを2回configすると二重になる）
+  gtag('config', 'G-2FK4EYF80H');
 </script>
 <title>お問い合わせ｜阿佐ヶ谷 マシンピラティス ASAGAYA GRAND PILATES</title>
 <meta name="description" content="阿佐ヶ谷駅徒歩5分のマシンピラティス専門スタジオ ASAGAYA GRAND PILATES へのお問い合わせ。体験レッスンのご予約・料金・レッスンに関するご質問はこちら。TEL 03-3311-8211。" />
@@ -19,7 +27,123 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet" />
 <link rel="preload" as="image" href="/images/agp-room.webp" type="image/webp" fetchpriority="high" />
-<link rel="stylesheet" href="/css/style.css?v=20260910a" />
+<link rel="stylesheet" href="/css/style.css?v=7d84747d" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "url": "https://grandpilates.site/contact/",
+  "name": "お問い合わせ｜ASAGAYA GRAND PILATES",
+  "about": { "@id": "https://grandpilates.site/#studio" },
+  "mainEntity": {
+    "@type": ["HealthAndBeautyBusiness", "ExerciseGym"],
+    "@id": "https://grandpilates.site/#studio",
+    "name": "ASAGAYA GRAND PILATES",
+    "url": "https://grandpilates.site/",
+    "telephone": "+81-3-3311-8211",
+    "email": "gp.asagaya-info@likefit.co.jp",
+    "address": {
+      "@type": "PostalAddress",
+      "postalCode": "166-0004",
+      "addressRegion": "東京都",
+      "addressLocality": "杉並区",
+      "streetAddress": "阿佐谷南1-36-4 三幸ビル 2F",
+      "addressCountry": "JP"
+    },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "09:30", "closes": "21:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "08:00", "closes": "17:00" }
+  ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "telephone": "+81-3-3311-8211",
+      "email": "gp.asagaya-info@likefit.co.jp",
+      "areaServed": "JP",
+      "availableLanguage": "Japanese"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://grandpilates.site/" },
+    { "@type": "ListItem", "position": 2, "name": "お問い合わせ", "item": "https://grandpilates.site/contact/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "体験レッスンの予約は電話とネットのどちらが早いですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "オンライン予約のほうが早く確実です。24時間受付で、空き枠がその場で確認できます。お急ぎのご相談や当日のご予約変更は、お電話（03-3311-8211）でも承っております。" } },
+    { "@type": "Question", "name": "問い合わせの返信はどのくらいで届きますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "メールでのお問い合わせには、営業時間内に順次ご返信しております。営業時間外にいただいたお問い合わせは翌営業日以降のご返信となります。お急ぎの場合はお電話をご利用ください。" } },
+    { "@type": "Question", "name": "体験レッスンの料金はいくらですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "初回体験は、グループレッスンが1,100円（税込）、プライベートレッスンが3,300円（税込）です。どちらもリフォーマーを使ったマシンピラティスをお試しいただけます。" } },
+    { "@type": "Question", "name": "入会前に見学だけすることはできますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "ご見学も承っております。ご希望の場合は事前にお電話（03-3311-8211）でご連絡ください。スタジオの雰囲気やマシンを実際にご覧いただけます。" } },
+    { "@type": "Question", "name": "しつこい勧誘はありませんか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "無理なおすすめはいたしません。体験当日は、お身体の状態やご希望をうかがったうえで、合いそうなプランをご案内するのみです。その場でご入会いただく必要はありません。" } }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://grandpilates.site/#organization",
+  "name": "ASAGAYA GRAND PILATES",
+  "alternateName": "阿佐ヶ谷グランドピラティス",
+  "url": "https://grandpilates.site/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://grandpilates.site/images/logo.png"
+  },
+  "telephone": "+81-3-3311-8211",
+  "email": "gp.asagaya-info@likefit.co.jp",
+  "address": {
+    "@type": "PostalAddress",
+    "postalCode": "166-0004",
+    "addressRegion": "東京都",
+    "addressLocality": "杉並区",
+    "streetAddress": "阿佐谷南1-36-4 三幸ビル2F",
+    "addressCountry": "JP"
+  },
+  "sameAs": [
+    "https://www.instagram.com/asagaya_grand_pilates/"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://grandpilates.site/#website",
+  "name": "ASAGAYA GRAND PILATES",
+  "url": "https://grandpilates.site/",
+  "inLanguage": "ja",
+  "publisher": {
+    "@id": "https://grandpilates.site/#organization"
+  }
+}
+</script>
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ASAGAYA GRAND PILATES" />
+<meta property="og:locale" content="ja_JP" />
+<meta property="og:title" content="お問い合わせ｜阿佐ヶ谷 マシンピラティス ASAGAYA GRAND PILATES" />
+<meta property="og:description" content="阿佐ヶ谷駅徒歩5分のマシンピラティス専門スタジオ ASAGAYA GRAND PILATES へのお問い合わせ。体験レッスンのご予約・料金・レッスンに関するご質問はこちら。TEL 03-3311-8211。" />
+<meta property="og:url" content="https://grandpilates.site/contact/" />
+<meta property="og:image" content="https://grandpilates.site/images/agp-studio-wide.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="お問い合わせ｜阿佐ヶ谷 マシンピラティス ASAGAYA GRAND PILATES" />
+<meta name="twitter:description" content="阿佐ヶ谷駅徒歩5分のマシンピラティス専門スタジオ ASAGAYA GRAND PILATES へのお問い合わせ。体験レッスンのご予約・料金・レッスンに関するご質問はこちら。TEL 03-3311-8211。" />
+<meta name="twitter:image" content="https://grandpilates.site/images/agp-studio-wide.jpg" />
 </head>
 <body>
 
@@ -27,7 +151,7 @@
 <header class="site-header" id="header">
   <div class="header-inner">
     <a href="/" class="brand" aria-label="ASAGAYA GRAND PILATES ホーム">
-      <img src="/images/logo.png" alt="" class="brand-mark" />
+      <img width="696" height="680" src="/images/logo.png" alt="" class="brand-mark" />
       <span class="brand-text">
         <span class="brand-en">GRAND&nbsp;PILATES</span>
         <span class="brand-ja">阿佐ヶ谷 マシンピラティス専門スタジオ</span>
@@ -37,8 +161,9 @@
     <nav class="nav" id="nav" aria-label="メインナビゲーション">
       <a href="/group/"><span class="n-en">GROUP</span><span class="n-jp">グループ</span></a>
       <a href="/private/"><span class="n-en">PRIVATE</span><span class="n-jp">プライベート</span></a>
-      <a href="/#price"><span class="n-en">PRICE</span><span class="n-jp">料金プラン</span></a>
-      <a href="/#faq"><span class="n-en">FAQ</span><span class="n-jp">よくある質問</span></a>
+      <a href="/price/"><span class="n-en">PRICE</span><span class="n-jp">料金プラン</span></a>
+      <a href="/faq/"><span class="n-en">FAQ</span><span class="n-jp">よくある質問</span></a>
+      <a href="/blog/"><span class="n-en">COLUMN</span><span class="n-jp">コラム</span></a>
       <a href="/#access"><span class="n-en">ACCESS</span><span class="n-jp">アクセス</span></a>
       <a href="/contact/" class="is-current" aria-current="page"><span class="n-en">CONTACT</span><span class="n-jp">お問い合わせ</span></a>
       <div class="nav-book" id="navBook">
@@ -46,6 +171,7 @@
         <div class="nav-drop">
           <a href="https://grandlohas.hacomono.jp/reserve/schedule/6/58" target="_blank" rel="noopener" class="nd-group">グループ体験<small>初回 ¥1,100</small></a>
           <a href="https://grandlohas.hacomono.jp/reserve/schedule/6/59" target="_blank" rel="noopener" class="nd-private">プライベート体験<small>初回 ¥3,300</small></a>
+          <a href="/trial/" class="nd-about">体験について詳しく<small>流れ・服装・持ち物</small></a>
         </div>
       </div>
       <a href="tel:0333118211" class="nav-tel">☎ 03-3311-8211</a>
@@ -64,8 +190,8 @@
     <div class="subhero-bg" style="background-image:url('/images/agp-room.jpg');background-image:image-set(url('/images/agp-room.webp') type('image/webp'), url('/images/agp-room.jpg') type('image/jpeg'))"></div>
     <div class="subhero-overlay"></div>
     <div class="subhero-inner">
-      <h1 class="en">CONTACT</h1>
-      <p class="ja">お問い合わせ</p>
+      <p class="en" aria-hidden="true">CONTACT</p>
+        <h1 class="ja">お問い合わせ｜阿佐ヶ谷 ASAGAYA GRAND PILATES</h1>
     </div>
     <p class="breadcrumb"><a href="/">ホーム</a><span class="sep">／</span>お問い合わせ</p>
   </section>
@@ -90,7 +216,7 @@
         <p class="cc-label">お問い合わせ先メールアドレス</p>
         <p class="cc-mail"><a href="mailto:gp.asagaya-info@likefit.co.jp">gp.asagaya-info@likefit.co.jp</a></p>
         <a class="btn btn-gold"
-           href="mailto:gp.asagaya-info@likefit.co.jp?subject=%E3%80%90ASAGAYA%20GRAND%20PILATES%E3%80%91%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B&body=%E2%96%A0%20%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0A%E2%96%A0%20%E3%81%8A%E9%9B%BB%E8%A9%B1%E7%95%AA%E5%8F%B7%EF%BC%9A%0A%E2%96%A0%20%E3%81%94%E7%94%A8%E4%BB%B6%EF%BC%9A%0A%0A">メールで問い合わせる</a>
+           href="mailto:gp.asagaya-info@likefit.co.jp?subject=%E3%80%90ASAGAYA%20GRAND%20PILATES%E3%80%91%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B&amp;body=%E2%96%A0%20%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0A%E2%96%A0%20%E3%81%8A%E9%9B%BB%E8%A9%B1%E7%95%AA%E5%8F%B7%EF%BC%9A%0A%E2%96%A0%20%E3%81%94%E5%B8%8C%E6%9C%9B%E3%81%AE%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3%EF%BC%9A%0A%E3%80%80%EF%BC%88%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%20%C2%A51%2C100%EF%BC%8F%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%20%C2%A53%2C300%EF%BC%8F%E3%81%BE%E3%81%A0%E6%B1%BA%E3%82%81%E3%81%A6%E3%81%84%E3%81%AA%E3%81%84%EF%BC%89%0A%E2%96%A0%20%E3%81%94%E7%94%A8%E4%BB%B6%EF%BC%9A%0A%0A%0A%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%E2%94%80%0AASAGAYA%20GRAND%20PILATES%20%E5%AE%9B%0A%E2%80%BB%20%E4%B8%8A%E3%81%AE%E9%A0%85%E7%9B%AE%E3%82%92%E3%81%94%E8%A8%98%E5%85%A5%E3%81%AE%E3%81%86%E3%81%88%E3%80%81%E3%81%9D%E3%81%AE%E3%81%BE%E3%81%BE%E9%80%81%E4%BF%A1%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82%0A">メールで問い合わせる</a>
       </div>
       <p class="tbl-note reveal">
         ※ お返事までお時間をいただく場合がございます。あらかじめご了承ください。<br />
@@ -101,17 +227,55 @@
       <div class="tbl-wrap reveal">
         <table class="tbl">
           <tr><th>電話番号<small>当日のご予約変更など</small></th><td><a href="tel:0333118211">03-3311-8211</a></td></tr>
-          <tr><th>所在地<small>JR阿佐ヶ谷駅より徒歩約5分</small></th><td class="td-text">東京都杉並区阿佐ヶ谷南1-36-4 三幸ビル2F</td></tr>
+          <tr><th>営業時間<small>定休日：月曜</small></th><td class="td-text">平日 9:30 – 21:30<br />土日 8:00 – 17:00</td></tr>
+          <tr><th>所在地<small>JR阿佐ヶ谷駅より徒歩約5分</small></th><td class="td-text">東京都杉並区阿佐谷南1-36-4 三幸ビル 2F</td></tr>
         </table>
       </div>
 
       <h3 class="tbl-head reveal">ご予約・よくあるご質問</h3>
       <ul class="reco reveal">
         <li><b>体験レッスンのご予約</b>は、オンライン予約ページより24時間受け付けています。</li>
-        <li>ご不明な点は、まず<a href="/#faq">よくあるご質問</a>もご確認ください。</li>
+        <li>ご不明な点は、まず<a href="/faq/">よくあるご質問</a>もご確認ください。</li>
         <li>レッスン内容の詳細は<a href="/group/">グループレッスン</a>／<a href="/private/">プライベートレッスン</a>のページをご覧ください。</li>
       </ul>
 
+    </div>
+  </section>
+
+  <!-- ===== FAQ（問い合わせ前によくいただくご質問） ===== -->
+  <section class="section faq" id="contact-faq" style="padding-top:0">
+    <div class="wrap wrap-narrow">
+      <header class="sec-head reveal">
+        <span class="sec-label">FAQ</span>
+        <h2 class="sec-title">お問い合わせ前に<span class="gold">よくいただくご質問</span></h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="reveal">
+          <summary>体験レッスンの予約は電話とネットのどちらが早いですか？</summary>
+          <div class="faq-a"><p>オンライン予約のほうが早く確実です。24時間受付で、空き枠がその場で確認できます。お急ぎのご相談や当日のご予約変更は、お電話（<a href="tel:0333118211">03-3311-8211</a>）でも承っております。</p></div>
+        </details>
+        <details class="reveal">
+          <summary>問い合わせの返信はどのくらいで届きますか？</summary>
+          <div class="faq-a"><p>メールでのお問い合わせには、営業時間内に順次ご返信しております。営業時間外にいただいたお問い合わせは翌営業日以降のご返信となります。お急ぎの場合はお電話をご利用ください。</p></div>
+        </details>
+        <details class="reveal">
+          <summary>体験レッスンの料金はいくらですか？</summary>
+          <div class="faq-a"><p>初回体験は、<a href="/group/">グループレッスン</a>が1,100円（税込）、<a href="/private/">プライベートレッスン</a>が3,300円（税込）です。どちらもリフォーマーを使ったマシンピラティスをお試しいただけます。</p></div>
+        </details>
+        <details class="reveal">
+          <summary>入会前に見学だけすることはできますか？</summary>
+          <div class="faq-a"><p>ご見学も承っております。ご希望の場合は事前にお電話（<a href="tel:0333118211">03-3311-8211</a>）でご連絡ください。スタジオの雰囲気やマシンを実際にご覧いただけます。</p></div>
+        </details>
+        <details class="reveal">
+          <summary>しつこい勧誘はありませんか？</summary>
+          <div class="faq-a"><p>無理なおすすめはいたしません。体験当日は、お身体の状態やご希望をうかがったうえで、合いそうなプランをご案内するのみです。その場でご入会いただく必要はありません。</p></div>
+        </details>
+      </div>
+
+      <p class="tbl-note reveal" style="text-align:center">
+        ほかのご質問は <a href="/faq/">よくあるご質問（24問）</a> もご覧ください。
+      </p>
     </div>
   </section>
 
@@ -139,22 +303,48 @@
 
 </main>
 
+<!-- ===== 系列施設への導線（2026-09-11 追加） ===== -->
+<section class="group-band">
+  <div class="wrap">
+    <p class="gb-label">SAME BUILDING</p>
+    <h2 class="gb-title">岩盤浴も、ヨガも、同じビルで。</h2>
+    <p class="gb-lead">どちらも阿佐ヶ谷・三幸ビルの中にあります。</p>
+    <div class="gb-grid">
+      <a href="https://tokyoganbanyoku.com/" class="gb-card" target="_blank" rel="noopener">
+        <span class="gb-en">TOKYO GANBANYOKU</span>
+        <span class="gb-name">東京岩盤浴</span>
+        <span class="gb-floor">三幸ビル 2F（当スタジオと同じ階）</span>
+        <span class="gb-desc">日本最大級の岩盤浴と<br>ハーバルテントサウナ</span>
+        <span class="gb-go">サイトを見る →</span>
+      </a>
+      <a href="https://lohas-lohas-studio.com/" class="gb-card" target="_blank" rel="noopener">
+        <span class="gb-en">LOHAS LOHAS</span>
+        <span class="gb-name">LOHAS LOHAS Studio</span>
+        <span class="gb-floor">三幸ビル 3F</span>
+        <span class="gb-desc">ヨガ・ホットヨガ・<br>ピラティスのスタジオ</span>
+        <span class="gb-go">サイトを見る →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ===== Footer ===== -->
 <footer class="site-footer">
   <div class="wrap footer-top">
 
     <div class="f-brand">
       <a href="/" class="f-logo">
-        <img src="/images/logo.png" alt="" />
+        <img width="696" height="680" src="/images/logo.png" alt="" />
         <span class="f-logo-text">
           <b>ASAGAYA GRAND PILATES</b>
           <small>阿佐ヶ谷 マシンピラティス専門スタジオ</small>
         </span>
       </a>
       <address class="f-address">
-        〒166-0004 東京都杉並区阿佐ヶ谷南1-36-4 三幸ビル2F<br />
+        〒166-0004 東京都杉並区阿佐谷南1-36-4 三幸ビル 2F<br />
         JR中央線・総武線「阿佐ヶ谷駅」より徒歩約5分
       </address>
+      <p class="f-hours">平日 9:30 – 21:30／土日 8:00 – 17:00<br />定休日：月曜</p>
       <div class="f-social">
         <a href="tel:0333118211" class="pill-btn pill-tel">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.56 1 1 0 0 1-.25 1.01Z"/></svg>
@@ -171,16 +361,20 @@
       <p class="f-col-title"><span class="en">LESSON</span>レッスン</p>
       <a href="/group/">グループレッスン</a>
       <a href="/private/">プライベートレッスン</a>
-      <a href="/#machine">マシンピラティスとは</a>
+      <a href="/about/">マシンピラティスとは</a>
+      <a href="/pilates-yoga/">ピラティスとヨガの違い</a>
     </nav>
 
     <nav class="f-col" aria-label="ご案内">
       <p class="f-col-title"><span class="en">GUIDE</span>ご案内</p>
-      <a href="/#price">料金プラン</a>
-      <a href="/#flow">体験の流れ</a>
-      <a href="/#faq">よくあるご質問</a>
+      <a href="/price/">料金プラン</a>
+      <a href="/campaign/">キャンペーン</a>
+      <a href="/trial/">体験レッスン</a>
+      <a href="/blog/">コラム</a>
+      <a href="/faq/">よくあるご質問</a>
       <a href="/#access">アクセス</a>
       <a href="/contact/">お問い合わせ</a>
+      <a href="/privacy/">プライバシーポリシー</a>
     </nav>
 
     <div class="f-col f-reserve">
@@ -200,6 +394,6 @@
   </div>
 </footer>
 
-<script src="/js/main.js?v=20260910a"></script>
+<script src="/js/main.js?v=7b60f415"></script>
 </body>
 </html>
