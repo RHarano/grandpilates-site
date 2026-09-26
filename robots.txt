@@ -1,4 +1,67 @@
+# ------------------------------------------------------------
+# 通常の検索エンジン
+# ------------------------------------------------------------
 User-agent: *
 Allow: /
+
+# ------------------------------------------------------------
+# AI検索・AIアシスタントのクローラー
+# ここを閉じると、AIの回答にこのサイトが出てこなくなります。
+# ------------------------------------------------------------
+
+# ChatGPTの検索
+User-agent: OAI-SearchBot
+Allow: /
+
+# ChatGPTがその場で読みに来る分
+User-agent: ChatGPT-User
+Allow: /
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+# Claude
+User-agent: ClaudeBot
+Allow: /
+
+# Claudeがその場で読みに来る分
+User-agent: Claude-User
+Allow: /
+
+# Claudeの検索
+User-agent: Claude-SearchBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Perplexityがその場で読みに来る分
+User-agent: Perplexity-User
+Allow: /
+
+# GoogleのAI回答
+User-agent: Google-Extended
+Allow: /
+
+# AppleのAI
+User-agent: Applebot-Extended
+Allow: /
+
+# Alexaなど
+User-agent: Amazonbot
+Allow: /
+
+# MetaのAI
+User-agent: meta-externalagent
+Allow: /
+
+# Common Crawl
+User-agent: CCBot
+Allow: /
+
+# AI向けのサイト要約
+# https://grandpilates.site/llms.txt
 
 Sitemap: https://grandpilates.site/sitemap.xml
