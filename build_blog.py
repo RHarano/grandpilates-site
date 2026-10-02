@@ -27,7 +27,21 @@ SHARED='G-2FK4EYF80H'
 GROUP='https://grandlohas.hacomono.jp/reserve/schedule/6/58'
 PRIVATE='https://grandlohas.hacomono.jp/reserve/schedule/6/59'
 
-def head(path,title,desc,image,lds):
+
+# 記事ごとの下書き。原稿の冒頭に draft: true と書くと、その記事だけ
+#   ・noindex,nofollow を付ける   （検索に出さない）
+#   ・sitemap.xml に載せない
+#   ・コラム一覧に出さない        （リンクをたどって来られない）
+# 確認用URLを直接開いたときだけ読める。公開するときは draft の行を消す。
+#
+# ※ このサイトは push がそのまま本番に出る。公開前の記事は必ず draft: true にすること。
+def is_draft(meta):
+    v = str(meta.get('draft','')).split('#')[0].strip().lower()
+    return v in ('true','1','yes')
+
+NOINDEX = '<meta name="robots" content="noindex,nofollow" />\n'
+
+def head(path,title,desc,image,lds,noindex=False):
     blocks='\n'.join('<script type="application/ld+json">\n%s\n</script>'
                      % json.dumps(d,ensure_ascii=False,indent=2) for d in lds)
     return f'''<!DOCTYPE html>
@@ -43,7 +57,7 @@ def head(path,title,desc,image,lds):
   gtag('config', '{GA}');
   gtag('config', '{SHARED}');
 </script>
-<title>{html.escape(title)}</title>
+{NOINDEX if noindex else ''}<title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}" />
 <link rel="canonical" href="{BASE}{path}" />
 <meta property="og:type" content="article" />
@@ -231,13 +245,28 @@ def build():
           "mainEntityOfPage":{"@type":"WebPage","@id":BASE+path},
           "image":f"{BASE}/images/{img}.jpg",
           "author":{"@type":"Organization","name":"ASAGAYA GRAND PILATES","url":BASE+"/"},
-          "publisher":{"@id":BASE+"/#organization"}},
+          "publisher":{"@id":BASE+"/#organization"},
+          "inLanguage":"ja","about":{"@id":BASE+"/#studio"}},
          {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
           {"@type":"ListItem","position":1,"name":"ホーム","item":BASE+"/"},
           {"@type":"ListItem","position":2,"name":"コラム","item":BASE+"/blog/"},
           {"@type":"ListItem","position":3,"name":meta['title'],"item":BASE+path}]},
         ]
-        h=(head(path, meta['title']+'｜ASAGAYA GRAND PILATES', meta['desc'], img, lds)
+        # 「？」で終わる見出しを質問、その直後の段落を回答として FAQPage にする。
+        # Googleの強調スニペットやAI検索に拾われやすくなる。
+        qa=[]
+        for q in [h for h in re.findall(r'^#{2,3}\s+(.+)$', body, re.M) if h.rstrip().endswith('？')]:
+            m=re.search(r'^#{2,3}\s+'+re.escape(q)+r'\s*\n+(.+?)(?=\n#{2,3}\s|\Z)', body, re.M|re.S)
+            if not m: continue
+            a=re.sub(r'\*\*([^*]+)\*\*', r'\1', m.group(1))
+            a=re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', a)
+            a=' '.join(x.strip() for x in a.split('\n')
+                       if x.strip() and not x.strip().startswith(('|','>','-','!')))[:380]
+            if a: qa.append({"@type":"Question","name":q,
+                             "acceptedAnswer":{"@type":"Answer","text":a}})
+        if qa:
+            lds.append({"@context":"https://schema.org","@type":"FAQPage","mainEntity":qa})
+        h=(head(path, meta['title']+'｜ASAGAYA GRAND PILATES', meta['desc'], img, lds, is_draft(meta))
            + HEADER
            + f'''
   <section class="subhero">
@@ -260,10 +289,15 @@ def build():
            + CTA + '\n</main>\n' + FOOTER)
         os.makedirs(f'blog/{slug}', exist_ok=True)
         open(f'blog/{slug}/index.html','w',encoding='utf-8').write(h)
-        posts.append((meta['date'], slug, meta['title'], meta['desc'], img))
+        posts.append((meta['date'], slug, meta['title'], meta['desc'], img, is_draft(meta)))
         print(f'  記事: /blog/{slug}/  {meta["title"]}')
 
     posts.sort(reverse=True)
+    drafts=[p for p in posts if p[5]]
+    posts=[p for p in posts if not p[5]]      # 一覧・sitemap は公開分だけ
+    if drafts:
+        print('  下書き（一覧・sitemapに出しません）:')
+        for p in drafts: print(f'    /blog/{p[1]}/  {p[2]}')
     cards='\n'.join(f'''        <a href="/blog/{s}/" class="post-card">
           <span class="pc-thumb">
             <picture><source srcset="/images/{thumb(i)}.webp" type="image/webp"><img src="/images/{thumb(i)}.jpg" alt="" loading="lazy" decoding="async" width="960" height="600" /></picture>
@@ -274,7 +308,7 @@ def build():
             <span class="pc-desc">{html.escape(ds[:62])}…</span>
             <span class="pc-go">続きを読む</span>
           </span>
-        </a>''' for d,s,t,ds,i in posts)
+        </a>''' for d,s,t,ds,i,_ in posts)
     lds=[{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
         {"@type":"ListItem","position":1,"name":"ホーム","item":BASE+"/"},
         {"@type":"ListItem","position":2,"name":"コラム","item":BASE+"/blog/"}]}]
@@ -308,11 +342,49 @@ def build():
     open('blog/index.html','w',encoding='utf-8').write(idx)
     print(f'  一覧: /blog/  （{len(posts)}記事）')
 
+    # 下書きの確認用ページ。これ自体も noindex で、どこからもリンクしていない。
+    if drafts:
+        dcards='\n'.join(f'''        <a href="/blog/{s}/" class="post-card">
+          <span class="pc-thumb">
+            <picture><source srcset="/images/{thumb(i)}.webp" type="image/webp"><img src="/images/{thumb(i)}.jpg" alt="" loading="lazy" decoding="async" width="960" height="600" /></picture>
+          </span>
+          <span class="pc-body">
+            <span class="pc-date">{d.replace('-','.')}</span>
+            <span class="pc-title">{html.escape(t)}</span>
+            <span class="pc-desc">{html.escape(ds[:62])}…</span>
+            <span class="pc-go">続きを読む</span>
+          </span>
+        </a>''' for d,s,t,ds,i,_ in drafts)
+        dp=(head('/blog/preview/','【確認用】コラム下書き一覧｜ASAGAYA GRAND PILATES',
+                 '公開前のコラムの確認用ページです。検索には表示されません。',
+                 'agp-studio-reformers',
+                 [{"@context":"https://schema.org","@type":"WebPage","name":"コラム下書き一覧"}], True)
+            + HEADER
+            + '''
+  <section class="section">
+    <div class="wrap">
+      <div style="background:#f6efe6;border:1px solid #d9c7ad;border-radius:12px;padding:22px 26px;margin-bottom:38px">
+        <p style="margin:0 0 6px;font-weight:700;font-size:1.05rem">確認用ページです</p>
+        <p style="margin:0;line-height:1.9;font-size:.95rem">
+          ここに並んでいる記事は<strong>まだ公開していません</strong>。検索結果には出ず、コラム一覧にも載っていません。<br />
+          公開してよい記事が決まりましたら、お知らせください。
+        </p>
+      </div>
+      <div class="post-grid">
+''' + dcards + '''
+      </div>
+    </div>
+  </section>
+''' + CTA + '\n</main>\n' + FOOTER)
+        os.makedirs('blog/preview', exist_ok=True)
+        open('blog/preview/index.html','w',encoding='utf-8').write(dp)
+        print(f'  確認用: /blog/preview/  （下書き{len(drafts)}本）')
+
     # sitemap に追記
     sm=open('sitemap.xml',encoding='utf-8').read()
     sm=re.sub(r'\s*<url>\s*<loc>[^<]*/blog[^<]*</loc>.*?</url>','',sm,flags=re.S)
     add='  <url>\n    <loc>%s/blog/</loc>\n    <lastmod>%s</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n' % (BASE, posts[0][0] if posts else datetime.date.today())
-    for d,s,t,ds,i in posts:
+    for d,s,t,ds,i,_ in posts:
         add+='  <url>\n    <loc>%s/blog/%s/</loc>\n    <lastmod>%s</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n' % (BASE,s,d)
     sm=sm.replace('</urlset>', add+'</urlset>')
     open('sitemap.xml','w',encoding='utf-8').write(sm)
