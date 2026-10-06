@@ -194,7 +194,8 @@ def md(text):
             b=''.join('<tr>'+''.join(f'<td>{inline(c)}</td>' for c in r)+'</tr>' for r in cells[1:])
             out.append(f'<div class="tbl-wrap"><table>{h}{b}</table></div>')
         elif mode=='ul': out.append('<ul class="reco">'+''.join(f'<li>{x}</li>' for x in buf)+'</ul>')
-        elif mode=='p' and buf: out.append('<p>'+'<br />'.join(buf)+'</p>')
+        # 原稿の改行はPC向けに置いたもの。スマホではCSSで無効にする
+        elif mode=='p' and buf: out.append('<p>'+'<br class="pc-br" />'.join(buf)+'</p>')
         buf=[]; mode=None
     for ln in text.split('\n'):
         l=ln.rstrip()

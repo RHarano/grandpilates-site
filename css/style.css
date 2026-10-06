@@ -1120,3 +1120,7 @@ html,body{overflow-x:hidden}
 .subhero .ja,.pc-title{word-break:auto-phrase;line-break:strict}
 /* クラス名・金額など、途中で割れると読みにくいものを1語として扱う */
 .nw{white-space:nowrap}
+@media (max-width:768px){
+  /* 原稿に入れた改行はPCの体裁用。スマホでは行が短く途切れてしまうので無効にする */
+  .article-body br.pc-br{display:none}
+}
