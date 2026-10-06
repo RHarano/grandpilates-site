@@ -214,10 +214,18 @@ def md(text):
     flush()
     return '\n      '.join(out)
 
+# 途中で改行されると読みにくいもの（クラス名・金額）を1語として扱う。
+# スマホで「BASIC／1.5」「約／¥2,720〜」のように割れていたため。
+NOWRAP = re.compile(r'((?:BASIC|FLOW)\s?\d(?:\.\d)?|約?¥[\d,]+〜?)')
+
 def inline(t):
     t=html.escape(t)
     t=re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
     t=re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2">\1</a>', t)
+    # タグの外側の文字だけを対象にする（href や class を壊さないため）
+    parts=re.split(r'(<[^>]+>)', t)
+    t=''.join(p if p.startswith('<') else NOWRAP.sub(r'<span class="nw">\1</span>', p)
+              for p in parts)
     return t
 
 def parse(p):

@@ -1110,3 +1110,13 @@ html,body{overflow-x:hidden}
   .article-body table{font-size:.85rem}
   .article-body th,.article-body td{padding:11px 10px}
 }
+
+/* ── 日本語の改行位置（2026-10-06） ─────────────────────────
+   スマホ幅だと「大丈夫で／す。」のように1文字だけ次の行に落ちたり、
+   「BASIC／1.5」のようにクラス名が割れてしまっていた。
+   auto-phrase は対応ブラウザだけが効き、未対応でも今までどおり。 */
+.article-body{word-break:auto-phrase;line-break:strict}
+.article-body h1,.article-body h2,.article-body h3,
+.subhero .ja,.pc-title{word-break:auto-phrase;line-break:strict}
+/* クラス名・金額など、途中で割れると読みにくいものを1語として扱う */
+.nw{white-space:nowrap}
