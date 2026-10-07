@@ -313,6 +313,23 @@ def build():
     if drafts:
         print('  下書き（一覧・sitemapに出しません）:')
         for p in drafts: print(f'    /blog/{p[1]}/  {p[2]}')
+
+    # 公開記事から下書きへリンクが張られていないか確認する。
+    # 「あわせて読みたい」は原稿に手書きなので、消し忘れると
+    # 公開ページから noindex のページへリンクが残ってしまう。
+    if drafts:
+        dslugs = {p[1] for p in drafts}
+        warn = []
+        for f in sorted(glob.glob('articles/*.md')):
+            sl = os.path.splitext(os.path.basename(f))[0]
+            if sl in dslugs: continue
+            body = open(f, encoding='utf-8').read()
+            for dd in dslugs:
+                if re.search(r'/blog/' + re.escape(dd) + r'/', body):
+                    warn.append(f'{sl} → {dd}')
+        if warn:
+            print('  ★ 公開記事から下書きへのリンクが残っています:')
+            for w in warn: print('    ', w)
     cards='\n'.join(f'''        <a href="/blog/{s}/" class="post-card">
           <span class="pc-thumb">
             <picture><source srcset="/images/{thumb(i)}.webp" type="image/webp"><img src="/images/{thumb(i)}.jpg" alt="" loading="lazy" decoding="async" width="960" height="600" /></picture>
