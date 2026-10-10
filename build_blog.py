@@ -35,9 +35,17 @@ PRIVATE='https://grandlohas.hacomono.jp/reserve/schedule/6/59'
 # 確認用URLを直接開いたときだけ読める。公開するときは draft の行を消す。
 #
 # ※ このサイトは push がそのまま本番に出る。公開前の記事は必ず draft: true にすること。
+def _draft_val(meta):
+    return str(meta.get('draft','')).split('#')[0].strip().lower()
+
 def is_draft(meta):
-    v = str(meta.get('draft','')).split('#')[0].strip().lower()
-    return v in ('true','1','yes')
+    # hold も公開しない。確認用ページの中で「保留中」として分けて並べる。
+    return _draft_val(meta) in ('true','1','yes','hold')
+
+def is_hold(meta):
+    """draft: hold ＝ 保留中。11月のレッスン変更を待っているもの。
+    確認してもらう対象ではないので、確認用ページでは別の枠に出す。"""
+    return _draft_val(meta) == 'hold'
 
 NOINDEX = '<meta name="robots" content="noindex,nofollow" />\n'
 
@@ -304,21 +312,25 @@ def build():
            + CTA + '\n</main>\n' + FOOTER)
         os.makedirs(f'blog/{slug}', exist_ok=True)
         open(f'blog/{slug}/index.html','w',encoding='utf-8').write(h)
-        posts.append((meta['date'], slug, meta['title'], meta['desc'], img, is_draft(meta)))
+        posts.append((meta['date'], slug, meta['title'], meta['desc'], img, is_draft(meta), is_hold(meta)))
         print(f'  記事: /blog/{slug}/  {meta["title"]}')
 
     posts.sort(reverse=True)
-    drafts=[p for p in posts if p[5]]
+    drafts=[p for p in posts if p[5] and not p[6]]   # 確認待ち
+    holds =[p for p in posts if p[6]]                 # 保留中
     posts=[p for p in posts if not p[5]]      # 一覧・sitemap は公開分だけ
     if drafts:
-        print('  下書き（一覧・sitemapに出しません）:')
+        print('  確認待ち（一覧・sitemapに出しません）:')
         for p in drafts: print(f'    /blog/{p[1]}/  {p[2]}')
+    if holds:
+        print('  保留中（11月のレッスン変更待ち）:')
+        for p in holds: print(f'    /blog/{p[1]}/  {p[2]}')
 
     # 公開記事から下書きへリンクが張られていないか確認する。
     # 「あわせて読みたい」は原稿に手書きなので、消し忘れると
     # 公開ページから noindex のページへリンクが残ってしまう。
-    if drafts:
-        dslugs = {p[1] for p in drafts}
+    if drafts or holds:
+        dslugs = {p[1] for p in drafts} | {p[1] for p in holds}
         warn = []
         for f in sorted(glob.glob('articles/*.md')):
             sl = os.path.splitext(os.path.basename(f))[0]
@@ -340,7 +352,7 @@ def build():
             <span class="pc-desc">{html.escape(ds[:62])}…</span>
             <span class="pc-go">続きを読む</span>
           </span>
-        </a>''' for d,s,t,ds,i,_ in posts)
+        </a>''' for d,s,t,ds,i,_,_h in posts)
     lds=[{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
         {"@type":"ListItem","position":1,"name":"ホーム","item":BASE+"/"},
         {"@type":"ListItem","position":2,"name":"コラム","item":BASE+"/blog/"}]}]
@@ -375,8 +387,9 @@ def build():
     print(f'  一覧: /blog/  （{len(posts)}記事）')
 
     # 下書きの確認用ページ。これ自体も noindex で、どこからもリンクしていない。
-    if drafts:
-        dcards='\n'.join(f'''        <a href="/blog/{s}/" class="post-card">
+    # 「確認待ち」と「保留中」を分けて並べる。
+    def _cards(rows):
+        return '\n'.join(f'''        <a href="/blog/{s}/" class="post-card">
           <span class="pc-thumb">
             <picture><source srcset="/images/{thumb(i)}.webp" type="image/webp"><img src="/images/{thumb(i)}.jpg" alt="" loading="lazy" decoding="async" width="960" height="600" /></picture>
           </span>
@@ -386,13 +399,10 @@ def build():
             <span class="pc-desc">{html.escape(ds[:62])}…</span>
             <span class="pc-go">続きを読む</span>
           </span>
-        </a>''' for d,s,t,ds,i,_ in drafts)
-        dp=(head('/blog/preview/','【確認用】コラム下書き一覧｜ASAGAYA GRAND PILATES',
-                 '公開前のコラムの確認用ページです。検索には表示されません。',
-                 'agp-studio-reformers',
-                 [{"@context":"https://schema.org","@type":"WebPage","name":"コラム下書き一覧"}], True)
-            + HEADER
-            + '''
+        </a>''' for d,s,t,ds,i,_,_h in rows)
+
+    if drafts or holds:
+        body = '''
   <section class="section">
     <div class="wrap">
       <div style="background:#f6efe6;border:1px solid #d9c7ad;border-radius:12px;padding:22px 26px;margin-bottom:38px">
@@ -402,21 +412,44 @@ def build():
           公開してよい記事が決まりましたら、お知らせください。
         </p>
       </div>
+'''
+        if drafts:
+            body += '''      <h2 style="font-size:1.25rem;margin:0 0 6px">確認をお願いしたい記事（%d本）</h2>
+      <p style="margin:0 0 22px;color:#6b6257;font-size:.93rem">公開してよいかを見ていただく分です。</p>
       <div class="post-grid">
-''' + dcards + '''
+%s
       </div>
-    </div>
+''' % (len(drafts), _cards(drafts))
+        if holds:
+            body += '''      <h2 style="font-size:1.25rem;margin:52px 0 6px">保留中（%d本）</h2>
+      <div style="background:#fdf3f3;border:1px solid #e3c9c9;border-radius:12px;padding:18px 22px;margin:0 0 22px">
+        <p style="margin:0;line-height:1.9;font-size:.93rem">
+          <strong>こちらは確認していただく必要はありません。</strong><br />
+          レッスンのクラス名やレベル表記（BASIC・FLOW・タワーなど）が本文に入っているため、
+          <strong>11月のレッスン変更を待って</strong>から書き直すか判断する分です。
+        </p>
+      </div>
+      <div class="post-grid">
+%s
+      </div>
+''' % (len(holds), _cards(holds))
+        body += '''    </div>
   </section>
-''' + CTA + '\n</main>\n' + FOOTER)
+'''
+        dp=(head('/blog/preview/','【確認用】コラム下書き一覧｜ASAGAYA GRAND PILATES',
+                 '公開前のコラムの確認用ページです。検索には表示されません。',
+                 'agp-studio-reformers',
+                 [{"@context":"https://schema.org","@type":"WebPage","name":"コラム下書き一覧"}], True)
+            + HEADER + body + CTA + '\n</main>\n' + FOOTER)
         os.makedirs('blog/preview', exist_ok=True)
         open('blog/preview/index.html','w',encoding='utf-8').write(dp)
-        print(f'  確認用: /blog/preview/  （下書き{len(drafts)}本）')
+        print(f'  確認用: /blog/preview/  （確認待ち{len(drafts)}本・保留中{len(holds)}本）')
 
     # sitemap に追記
     sm=open('sitemap.xml',encoding='utf-8').read()
     sm=re.sub(r'\s*<url>\s*<loc>[^<]*/blog[^<]*</loc>.*?</url>','',sm,flags=re.S)
     add='  <url>\n    <loc>%s/blog/</loc>\n    <lastmod>%s</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n' % (BASE, posts[0][0] if posts else datetime.date.today())
-    for d,s,t,ds,i,_ in posts:
+    for d,s,t,ds,i,_,_h in posts:
         add+='  <url>\n    <loc>%s/blog/%s/</loc>\n    <lastmod>%s</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n' % (BASE,s,d)
     sm=sm.replace('</urlset>', add+'</urlset>')
     open('sitemap.xml','w',encoding='utf-8').write(sm)

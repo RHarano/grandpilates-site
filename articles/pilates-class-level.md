@@ -3,7 +3,7 @@ title: ピラティスのクラスはどれを選ぶ？BASIC・FLOW・タワー�
 desc: ASAGAYA GRAND PILATES のクラス構成を、BASIC 1 / BASIC 1.5 / FLOW 1.5 / FLOW 2 とタワークラスの違いから整理します。阿佐ヶ谷のマシンピラティス専門スタジオ。
 date: 2026-10-03
 hero: agp-reformer-springs
-draft: true   # 確認中。OKが出たらこの行を消す
+draft: hold   # 保留。11月のレッスン変更を待つ（クラス名が本文にある）
 ---
 
 予約ページを開くと、クラス名がいくつも並んでいます。
