@@ -2,6 +2,7 @@
 title: 西荻窪・吉祥寺・三鷹から阿佐ヶ谷のピラティスへ
 desc: 西荻窪・吉祥寺・三鷹方面から阿佐ヶ谷のマシンピラティススタジオへ通う方法をご案内します。中央線で数分、駅から徒歩5分。ASAGAYA GRAND PILATES。
 date: 2026-10-10
+cat: エリア・施設
 hero: agp-entrance-wide
 draft: true   # 確認中。OKが出たらこの行を消す
 ---

@@ -48,6 +48,16 @@ def is_hold(meta):
     return _draft_val(meta) == 'hold'
 
 NOINDEX = '<meta name="robots" content="noindex,nofollow" />\n'
+CATS = ["はじめての方へ","体の悩み","ピラティスのこと","続け方","料金・ご利用条件","エリア・施設","その他"]
+LIST_CSS = '<style>.col-filbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:0 auto 44px;max-width:900px}.col-fil{appearance:none;border:1px solid #ddd0bb;background:#fff;color:#7d6a52;border-radius:999px;padding:9px 18px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.4;transition:background .2s,color .2s,border-color .2s}.col-fil i{font-style:normal;margin-left:7px;font-size:11.5px;opacity:.65}.col-fil:hover{border-color:#a98457;color:#a98457}.col-fil.is-on{background:#a98457;border-color:#a98457;color:#fff}.col-sec{margin:0 0 48px}.col-sec[hidden]{display:none}.col-sec__h{font-size:1.1rem;font-weight:700;letter-spacing:.04em;color:#6b5b46;margin:0 0 18px;padding:0 0 10px;border-bottom:1px solid #e8ded0;display:flex;align-items:baseline;gap:10px}.col-sec__h span{font-size:12px;font-weight:600;color:#bda98c;letter-spacing:.08em}</style>'
+LIST_JS = "<script>(function(){var bar=document.querySelector('.col-filbar');if(!bar)return;var secs=[].slice.call(document.querySelectorAll('.col-sec'));bar.addEventListener('click',function(e){var b=e.target.closest('.col-fil');if(!b)return;var c=b.dataset.cat;[].forEach.call(bar.querySelectorAll('.col-fil'),function(x){x.classList.toggle('is-on',x===b);});secs.forEach(function(s){s.hidden=(c!=='all'&&s.dataset.cat!==c);});window.scrollTo({top:bar.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});});})();</script>"
+_TAIL = re.compile(r'阿佐ヶ谷|杉並区|ASAGAYA GRAND PILATES|マシンピラティス専門スタジオ。|スタジオ。')
+def short_desc(ds, n=60):
+    parts=[x for x in ds.split('。') if x.strip()]
+    while len(parts)>1 and _TAIL.search(parts[-1]): parts.pop()
+    s='。'.join(parts)+'。'
+    return s if len(s)<=n else s[:n]+'…'
+
 
 def head(path,title,desc,image,lds,noindex=False):
     blocks='\n'.join('<script type="application/ld+json">\n%s\n</script>'
@@ -255,6 +265,38 @@ def thumb(name):
     """一覧カード用。<name>-thumb があればそれを使う（960x600・16:10）。"""
     return name+'-thumb' if os.path.exists(f'images/{name}-thumb.jpg') else name
 
+def _one(s, t_, ds, i):
+    return ('        <a href="/blog/%s/" class="post-card">\n'
+            '            <span class="pc-thumb">\n'
+            '              <picture><source srcset="/images/%s.webp" type="image/webp"><img src="/images/%s.jpg" alt="" loading="lazy" decoding="async" width="960" height="600" /></picture>\n'
+            '            </span>\n'
+            '            <span class="pc-body">\n'
+            '              <span class="pc-title">%s</span>\n'
+            '              <span class="pc-desc">%s</span>\n'
+            '              <span class="pc-go">続きを読む</span>\n'
+            '            </span>\n'
+            '          </a>') % (s, thumb(i), thumb(i), html.escape(t_), html.escape(short_desc(ds)))
+
+def _secs(rows, tag='h2'):
+    by={}
+    for r in rows: by.setdefault(r[7],[]).append(r)
+    order=[c for c in CATS if by.get(c)]+[c for c in by if c not in CATS]
+    out=''
+    for c in order:
+        out+=('<section class="col-sec" data-cat="%s">\n<%s class="col-sec__h">%s<span>%d</span></%s>\n'
+              '<div class="post-grid">\n%s\n</div>\n</section>\n'
+              %(html.escape(c), tag, html.escape(c), len(by[c]), tag,
+                '\n'.join(_one(r[1],r[2],r[3],r[4]) for r in by[c])))
+    return out
+
+def grouped(rows):
+    by={}
+    for r in rows: by.setdefault(r[7],[]).append(r)
+    order=[c for c in CATS if by.get(c)]+[c for c in by if c not in CATS]
+    b='<button class="col-fil is-on" data-cat="all">すべて<i>%d</i></button>'%len(rows)
+    b+=''.join('<button class="col-fil" data-cat="%s">%s<i>%d</i></button>'%(html.escape(c),html.escape(c),len(by[c])) for c in order)
+    return '<div class="col-filbar">%s</div>\n%s'%(b,_secs(rows))
+
 def build():
     posts=[]
     for f in sorted(glob.glob('articles/*.md')):
@@ -314,7 +356,7 @@ def build():
            + CTA + '\n</main>\n' + FOOTER)
         os.makedirs(f'blog/{slug}', exist_ok=True)
         open(f'blog/{slug}/index.html','w',encoding='utf-8').write(h)
-        posts.append((meta['date'], slug, meta['title'], meta['desc'], img, is_draft(meta), is_hold(meta)))
+        posts.append((meta['date'], slug, meta['title'], meta['desc'], img, is_draft(meta), is_hold(meta), meta.get('cat','その他')))
         print(f'  記事: /blog/{slug}/  {meta["title"]}')
 
     posts.sort(reverse=True)
@@ -344,17 +386,7 @@ def build():
         if warn:
             print('  ★ 公開記事から下書きへのリンクが残っています:')
             for w in warn: print('    ', w)
-    cards='\n'.join(f'''        <a href="/blog/{s}/" class="post-card">
-          <span class="pc-thumb">
-            <picture><source srcset="/images/{thumb(i)}.webp" type="image/webp"><img src="/images/{thumb(i)}.jpg" alt="" loading="lazy" decoding="async" width="960" height="600" /></picture>
-          </span>
-          <span class="pc-body">
-            <span class="pc-date">{d.replace('-','.')}</span>
-            <span class="pc-title">{html.escape(t)}</span>
-            <span class="pc-desc">{html.escape(ds[:62])}…</span>
-            <span class="pc-go">続きを読む</span>
-          </span>
-        </a>''' for d,s,t,ds,i,_,_h in posts)
+    cards = grouped(posts)
     lds=[{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
         {"@type":"ListItem","position":1,"name":"ホーム","item":BASE+"/"},
         {"@type":"ListItem","position":2,"name":"コラム","item":BASE+"/blog/"}]}]
@@ -379,29 +411,18 @@ def build():
         マシンピラティスの特徴や続け方、体験の前に気になることを、<br />
         阿佐ヶ谷のスタジオからお伝えします。
       </p>
-      <div class="post-grid">
 ''' + cards + '''
-      </div>
     </div>
   </section>
 ''' + CTA + '\n</main>\n' + FOOTER)
+    idx = idx.replace('</head>', LIST_CSS + '</head>', 1).replace('</body>', LIST_JS + '</body>', 1)
     open('blog/index.html','w',encoding='utf-8').write(idx)
     print(f'  一覧: /blog/  （{len(posts)}記事）')
 
     # 下書きの確認用ページ。これ自体も noindex で、どこからもリンクしていない。
     # 「確認待ち」と「保留中」を分けて並べる。
     def _cards(rows):
-        return '\n'.join(f'''        <a href="/blog/{s}/" class="post-card">
-          <span class="pc-thumb">
-            <picture><source srcset="/images/{thumb(i)}.webp" type="image/webp"><img src="/images/{thumb(i)}.jpg" alt="" loading="lazy" decoding="async" width="960" height="600" /></picture>
-          </span>
-          <span class="pc-body">
-            <span class="pc-date">{d.replace('-','.')}</span>
-            <span class="pc-title">{html.escape(t)}</span>
-            <span class="pc-desc">{html.escape(ds[:62])}…</span>
-            <span class="pc-go">続きを読む</span>
-          </span>
-        </a>''' for d,s,t,ds,i,_,_h in rows)
+        return _secs(rows, tag='h3')
 
     if drafts or holds:
         body = '''
@@ -418,9 +439,7 @@ def build():
         if drafts:
             body += '''      <h2 style="font-size:1.25rem;margin:0 0 6px">確認をお願いしたい記事（%d本）</h2>
       <p style="margin:0 0 22px;color:#6b6257;font-size:.93rem">公開してよいかを見ていただく分です。</p>
-      <div class="post-grid">
 %s
-      </div>
 ''' % (len(drafts), _cards(drafts))
         if holds:
             body += '''      <h2 style="font-size:1.25rem;margin:52px 0 6px">保留中（%d本）</h2>
@@ -431,9 +450,7 @@ def build():
           <strong>11月のレッスン変更を待って</strong>から書き直すか判断する分です。
         </p>
       </div>
-      <div class="post-grid">
 %s
-      </div>
 ''' % (len(holds), _cards(holds))
         body += '''    </div>
   </section>
@@ -444,6 +461,7 @@ def build():
                  [{"@context":"https://schema.org","@type":"WebPage","name":"コラム下書き一覧"}], True)
             + HEADER + body + CTA + '\n</main>\n' + FOOTER)
         os.makedirs('blog/preview', exist_ok=True)
+        dp = dp.replace('</head>', LIST_CSS + '</head>', 1).replace('</body>', LIST_JS + '</body>', 1)
         open('blog/preview/index.html','w',encoding='utf-8').write(dp)
         print(f'  確認用: /blog/preview/  （確認待ち{len(drafts)}本・保留中{len(holds)}本）')
 
@@ -451,7 +469,7 @@ def build():
     sm=open('sitemap.xml',encoding='utf-8').read()
     sm=re.sub(r'\s*<url>\s*<loc>[^<]*/blog[^<]*</loc>.*?</url>','',sm,flags=re.S)
     add='  <url>\n    <loc>%s/blog/</loc>\n    <lastmod>%s</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n' % (BASE, posts[0][0] if posts else datetime.date.today())
-    for d,s,t,ds,i,_,_h in posts:
+    for d,s,t,ds,i,_,_h,_c in posts:
         add+='  <url>\n    <loc>%s/blog/%s/</loc>\n    <lastmod>%s</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n' % (BASE,s,d)
     sm=sm.replace('</urlset>', add+'</urlset>')
     open('sitemap.xml','w',encoding='utf-8').write(sm)

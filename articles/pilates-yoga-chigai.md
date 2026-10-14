@@ -2,6 +2,7 @@
 title: ピラティスとヨガの違い｜目的が違うので、両方やる方も
 desc: ピラティスとヨガの違いを、目的・呼吸・動き方の3点で整理します。どちらを選ぶか迷っている方へ。阿佐ヶ谷駅徒歩5分 ASAGAYA GRAND PILATES。
 date: 2026-10-08
+cat: ピラティスのこと
 hero: agp-studio-mirror
 ---
 

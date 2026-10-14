@@ -2,6 +2,7 @@
 title: ピラティスと岩盤浴を同じ日に｜同じビルの中にあります
 desc: ASAGAYA GRAND PILATES と同じ三幸ビルにある東京岩盤浴を、同じ日に使う方法をご案内します。シャワーは30分¥300。阿佐ヶ谷駅徒歩5分。
 date: 2026-10-08
+cat: エリア・施設
 hero: agp-entrance-wide
 ---
 

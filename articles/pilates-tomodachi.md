@@ -2,6 +2,7 @@
 title: 友達や家族と一緒にピラティスに通える？
 desc: お友達やご家族と一緒にマシンピラティスに通う場合の予約方法と、注意しておきたい点をご説明します。阿佐ヶ谷駅徒歩5分 ASAGAYA GRAND PILATES。
 date: 2026-10-08
+cat: はじめての方へ
 hero: agp-studio-reformers-2
 ---
 

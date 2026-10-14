@@ -2,6 +2,7 @@
 title: 冷えが気になる方へ｜動かしていない場所が冷える
 desc: 手足の冷えが気になる方へ、マシンピラティスでどこを見ていくかをご説明します。同じ建物の岩盤浴との組み合わせも。阿佐ヶ谷駅徒歩5分 ASAGAYA GRAND PILATES。
 date: 2026-10-08
+cat: 体の悩み
 hero: agp-lesson-kneeling
 ---
 
